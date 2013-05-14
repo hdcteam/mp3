@@ -1,0 +1,1209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Artists" EntityType="DatabaseModel.Store.Artists" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Categories" EntityType="DatabaseModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Countries" EntityType="DatabaseModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlaylistComment" EntityType="DatabaseModel.Store.PlaylistComment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Playlists" EntityType="DatabaseModel.Store.Playlists" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SongCategory" EntityType="DatabaseModel.Store.SongCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SongComment" EntityType="DatabaseModel.Store.SongComment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SongPlaylist" EntityType="DatabaseModel.Store.SongPlaylist" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Songs" EntityType="DatabaseModel.Store.Songs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SongSinger" EntityType="DatabaseModel.Store.SongSinger" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SongWriter" EntityType="DatabaseModel.Store.SongWriter" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserLikeArtist" EntityType="DatabaseModel.Store.UserLikeArtist" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserLikePlaylist" EntityType="DatabaseModel.Store.UserLikePlaylist" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserLikeSong" EntityType="DatabaseModel.Store.UserLikeSong" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="DatabaseModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Membership" EntityType="DatabaseModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Roles" EntityType="DatabaseModel.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="DatabaseModel.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Artists_Countries" Association="DatabaseModel.Store.FK_Artists_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Artists" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistComment_Playlists" Association="DatabaseModel.Store.FK_PlaylistComment_Playlists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="PlaylistComment" EntitySet="PlaylistComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistComment_UserProfile" Association="DatabaseModel.Store.FK_PlaylistComment_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="PlaylistComment" EntitySet="PlaylistComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlists_UserProfile" Association="DatabaseModel.Store.FK_Playlists_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="DatabaseModel.Store.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongCategory_Categories" Association="DatabaseModel.Store.FK_SongCategory_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="SongCategory" EntitySet="SongCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongCategory_Songs" Association="DatabaseModel.Store.FK_SongCategory_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongCategory" EntitySet="SongCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongComment_Songs" Association="DatabaseModel.Store.FK_SongComment_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongComment" EntitySet="SongComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongComment_UserProfile" Association="DatabaseModel.Store.FK_SongComment_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="SongComment" EntitySet="SongComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongComposter_Artists" Association="DatabaseModel.Store.FK_SongComposter_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="SongWriter" EntitySet="SongWriter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongComposter_Songs" Association="DatabaseModel.Store.FK_SongComposter_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongWriter" EntitySet="SongWriter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongPlaylist_HasSongs" Association="DatabaseModel.Store.FK_SongPlaylist_HasSongs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongPlaylist" EntitySet="SongPlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongPlaylist_InPlaylists" Association="DatabaseModel.Store.FK_SongPlaylist_InPlaylists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="SongPlaylist" EntitySet="SongPlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Songs_Countries" Association="DatabaseModel.Store.FK_Songs_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongSinger_Artists" Association="DatabaseModel.Store.FK_SongSinger_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="SongSinger" EntitySet="SongSinger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongSinger_Songs" Association="DatabaseModel.Store.FK_SongSinger_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongSinger" EntitySet="SongSinger" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="DatabaseModel.Store.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLikeArtist_Artists" Association="DatabaseModel.Store.FK_UserLikeArtist_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="UserLikeArtist" EntitySet="UserLikeArtist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLikeArtist_UserProfile" Association="DatabaseModel.Store.FK_UserLikeArtist_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserLikeArtist" EntitySet="UserLikeArtist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLikePlaylist_Playlists" Association="DatabaseModel.Store.FK_UserLikePlaylist_Playlists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="UserLikePlaylist" EntitySet="UserLikePlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLikePlaylist_UserProfile" Association="DatabaseModel.Store.FK_UserLikePlaylist_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserLikePlaylist" EntitySet="UserLikePlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLikeSong_Songs" Association="DatabaseModel.Store.FK_UserLikeSong_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="UserLikeSong" EntitySet="UserLikeSong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLikeSong_UserProfile" Association="DatabaseModel.Store.FK_UserLikeSong_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserLikeSong" EntitySet="UserLikeSong" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Artists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="ntext" />
+          <Property Name="Info" Type="ntext" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Dob" Type="date" />
+          <Property Name="Website" Type="nvarchar" MaxLength="500" />
+          <Property Name="View" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PlaylistComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PlaylistId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="PostTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Playlists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Image" Type="ntext" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="View" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="StaffPickedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SongCategory">
+          <Key>
+            <PropertyRef Name="SongId" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="SongId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SongComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SongId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="PostTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SongPlaylist">
+          <Key>
+            <PropertyRef Name="SongId" />
+            <PropertyRef Name="PlaylistId" />
+          </Key>
+          <Property Name="SongId" Type="int" Nullable="false" />
+          <Property Name="PlaylistId" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Info" Type="ntext" />
+          <Property Name="Lyrics" Type="ntext" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="MusicFile" Type="nvarchar" MaxLength="500" />
+          <Property Name="VideoFile" Type="nchar" MaxLength="500" />
+          <Property Name="Image" Type="ntext" />
+          <Property Name="Quality" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="View" Type="int" Nullable="false" />
+          <Property Name="Download" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="StaffPickedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SongSinger">
+          <Key>
+            <PropertyRef Name="SongId" />
+            <PropertyRef Name="SingerId" />
+          </Key>
+          <Property Name="SongId" Type="int" Nullable="false" />
+          <Property Name="SingerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SongWriter">
+          <Key>
+            <PropertyRef Name="SongId" />
+            <PropertyRef Name="WriterId" />
+          </Key>
+          <Property Name="SongId" Type="int" Nullable="false" />
+          <Property Name="WriterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLikeArtist">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ArtistId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ArtistId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLikePlaylist">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="PlaylistId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PlaylistId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLikeSong">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="SongId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SongId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image" Type="ntext" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Artists_Countries">
+          <End Role="Countries" Type="DatabaseModel.Store.Countries" Multiplicity="0..1" />
+          <End Role="Artists" Type="DatabaseModel.Store.Artists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Artists">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistComment_Playlists">
+          <End Role="Playlists" Type="DatabaseModel.Store.Playlists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PlaylistComment" Type="DatabaseModel.Store.PlaylistComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlaylistComment">
+              <PropertyRef Name="PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistComment_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.Store.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PlaylistComment" Type="DatabaseModel.Store.PlaylistComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlaylistComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlists_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.Store.UserProfile" Multiplicity="0..1" />
+          <End Role="Playlists" Type="DatabaseModel.Store.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="DatabaseModel.Store.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="DatabaseModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongCategory_Categories">
+          <End Role="Categories" Type="DatabaseModel.Store.Categories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongCategory" Type="DatabaseModel.Store.SongCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongCategory_Songs">
+          <End Role="Songs" Type="DatabaseModel.Store.Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongCategory" Type="DatabaseModel.Store.SongCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongCategory">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongComment_Songs">
+          <End Role="Songs" Type="DatabaseModel.Store.Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongComment" Type="DatabaseModel.Store.SongComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongComment">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongComment_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.Store.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongComment" Type="DatabaseModel.Store.SongComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SongComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongComposter_Artists">
+          <End Role="Artists" Type="DatabaseModel.Store.Artists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongWriter" Type="DatabaseModel.Store.SongWriter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongWriter">
+              <PropertyRef Name="WriterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongComposter_Songs">
+          <End Role="Songs" Type="DatabaseModel.Store.Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongWriter" Type="DatabaseModel.Store.SongWriter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongWriter">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongPlaylist_HasSongs">
+          <End Role="Songs" Type="DatabaseModel.Store.Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongPlaylist" Type="DatabaseModel.Store.SongPlaylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongPlaylist">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongPlaylist_InPlaylists">
+          <End Role="Playlists" Type="DatabaseModel.Store.Playlists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongPlaylist" Type="DatabaseModel.Store.SongPlaylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongPlaylist">
+              <PropertyRef Name="PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Songs_Countries">
+          <End Role="Countries" Type="DatabaseModel.Store.Countries" Multiplicity="0..1" />
+          <End Role="Songs" Type="DatabaseModel.Store.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongSinger_Artists">
+          <End Role="Artists" Type="DatabaseModel.Store.Artists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongSinger" Type="DatabaseModel.Store.SongSinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongSinger">
+              <PropertyRef Name="SingerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongSinger_Songs">
+          <End Role="Songs" Type="DatabaseModel.Store.Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongSinger" Type="DatabaseModel.Store.SongSinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongSinger">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="DatabaseModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="DatabaseModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLikeArtist_Artists">
+          <End Role="Artists" Type="DatabaseModel.Store.Artists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLikeArtist" Type="DatabaseModel.Store.UserLikeArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLikeArtist">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLikeArtist_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="UserLikeArtist" Type="DatabaseModel.Store.UserLikeArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserLikeArtist">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLikePlaylist_Playlists">
+          <End Role="Playlists" Type="DatabaseModel.Store.Playlists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLikePlaylist" Type="DatabaseModel.Store.UserLikePlaylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLikePlaylist">
+              <PropertyRef Name="PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLikePlaylist_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="UserLikePlaylist" Type="DatabaseModel.Store.UserLikePlaylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserLikePlaylist">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLikeSong_Songs">
+          <End Role="Songs" Type="DatabaseModel.Store.Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserLikeSong" Type="DatabaseModel.Store.UserLikeSong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLikeSong">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLikeSong_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="UserLikeSong" Type="DatabaseModel.Store.UserLikeSong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserLikeSong">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Artists" EntityType="DatabaseModel.Artists" />
+          <EntitySet Name="Categories" EntityType="DatabaseModel.Categories" />
+          <EntitySet Name="Countries" EntityType="DatabaseModel.Countries" />
+          <EntitySet Name="PlaylistComment" EntityType="DatabaseModel.PlaylistComment" />
+          <EntitySet Name="SongComment" EntityType="DatabaseModel.SongComment" />
+          <EntitySet Name="Songs" EntityType="DatabaseModel.Songs" />
+          <EntitySet Name="UserProfile" EntityType="DatabaseModel.UserProfile" />
+          <EntitySet Name="webpages_Membership" EntityType="DatabaseModel.webpages_Membership" />
+          <EntitySet Name="webpages_Roles" EntityType="DatabaseModel.webpages_Roles" />
+          <AssociationSet Name="FK_Artists_Countries" Association="DatabaseModel.FK_Artists_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Artists" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Songs_Countries" Association="DatabaseModel.FK_Songs_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistComment_UserProfile" Association="DatabaseModel.FK_PlaylistComment_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="PlaylistComment" EntitySet="PlaylistComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongComment_Songs" Association="DatabaseModel.FK_SongComment_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongComment" EntitySet="SongComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongComment_UserProfile" Association="DatabaseModel.FK_SongComment_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="SongComment" EntitySet="SongComment" />
+          </AssociationSet>
+          <AssociationSet Name="SongCategory" Association="DatabaseModel.SongCategory">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="SongSinger" Association="DatabaseModel.SongSinger">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="SongWriter" Association="DatabaseModel.SongWriter">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="UserLikeArtist" Association="DatabaseModel.UserLikeArtist">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="UserLikeSong" Association="DatabaseModel.UserLikeSong">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="DatabaseModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <EntitySet Name="Playlists" EntityType="DatabaseModel.Playlists" />
+          <EntitySet Name="SongPlaylist" EntityType="DatabaseModel.SongPlaylist" />
+          <AssociationSet Name="FK_PlaylistComment_Playlists" Association="DatabaseModel.FK_PlaylistComment_Playlists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="PlaylistComment" EntitySet="PlaylistComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlists_UserProfile" Association="DatabaseModel.FK_Playlists_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongPlaylist_InPlaylists" Association="DatabaseModel.FK_SongPlaylist_InPlaylists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="SongPlaylist" EntitySet="SongPlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongPlaylist_HasSongs" Association="DatabaseModel.FK_SongPlaylist_HasSongs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongPlaylist" EntitySet="SongPlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="UserLikePlaylist" Association="DatabaseModel.UserLikePlaylist">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Artists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RealName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Info" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="Dob" Type="DateTime" Precision="0" />
+          <Property Name="Website" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="View" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="DatabaseModel.FK_Artists_Countries" FromRole="Artists" ToRole="Countries" />
+          <NavigationProperty Name="SangSongs" Relationship="DatabaseModel.SongSinger" FromRole="Artists" ToRole="Songs" />
+          <NavigationProperty Name="WroteSongs" Relationship="DatabaseModel.SongWriter" FromRole="Artists" ToRole="Songs" />
+          <NavigationProperty Name="UserProfile" Relationship="DatabaseModel.UserLikeArtist" FromRole="Artists" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Songs" Relationship="DatabaseModel.SongCategory" FromRole="Categories" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Artists" Relationship="DatabaseModel.FK_Artists_Countries" FromRole="Countries" ToRole="Artists" />
+          <NavigationProperty Name="Songs" Relationship="DatabaseModel.FK_Songs_Countries" FromRole="Countries" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="PlaylistComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PlaylistId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.FK_PlaylistComment_UserProfile" FromRole="PlaylistComment" ToRole="UserProfile" />
+          <NavigationProperty Name="Playlists" Relationship="DatabaseModel.FK_PlaylistComment_Playlists" FromRole="PlaylistComment" ToRole="Playlists" />
+        </EntityType>
+        <EntityType Name="SongComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="SongId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Song" Relationship="DatabaseModel.FK_SongComment_Songs" FromRole="SongComment" ToRole="Songs" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.FK_SongComment_UserProfile" FromRole="SongComment" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Info" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="MusicFile" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="VideoFile" Type="String" MaxLength="500" Unicode="true" FixedLength="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Quality" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="View" Type="Int32" Nullable="false" />
+          <Property Name="Download" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="StaffPickedTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Country" Relationship="DatabaseModel.FK_Songs_Countries" FromRole="Songs" ToRole="Countries" />
+          <NavigationProperty Name="Comments" Relationship="DatabaseModel.FK_SongComment_Songs" FromRole="Songs" ToRole="SongComment" />
+          <NavigationProperty Name="Categories" Relationship="DatabaseModel.SongCategory" FromRole="Songs" ToRole="Categories" />
+          <NavigationProperty Name="Singers" Relationship="DatabaseModel.SongSinger" FromRole="Songs" ToRole="Artists" />
+          <NavigationProperty Name="Writers" Relationship="DatabaseModel.SongWriter" FromRole="Songs" ToRole="Artists" />
+          <NavigationProperty Name="LikedUsers" Relationship="DatabaseModel.UserLikeSong" FromRole="Songs" ToRole="UserProfile" />
+          <NavigationProperty Name="SongPlaylist" Relationship="DatabaseModel.FK_SongPlaylist_HasSongs" FromRole="Songs" ToRole="SongPlaylist" />
+          <Property Type="String" Name="Lyrics" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CommentedPlaylists" Relationship="DatabaseModel.FK_PlaylistComment_UserProfile" FromRole="UserProfile" ToRole="PlaylistComment" />
+          <NavigationProperty Name="CommentedSongs" Relationship="DatabaseModel.FK_SongComment_UserProfile" FromRole="UserProfile" ToRole="SongComment" />
+          <NavigationProperty Name="LikedArtists" Relationship="DatabaseModel.UserLikeArtist" FromRole="UserProfile" ToRole="Artists" />
+          <NavigationProperty Name="LikedSongs" Relationship="DatabaseModel.UserLikeSong" FromRole="UserProfile" ToRole="Songs" />
+          <NavigationProperty Name="Roles" Relationship="DatabaseModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+          <NavigationProperty Name="Playlists" Relationship="DatabaseModel.FK_Playlists_UserProfile" FromRole="UserProfile" ToRole="Playlists" />
+          <NavigationProperty Name="LikedPlaylists" Relationship="DatabaseModel.UserLikePlaylist" FromRole="UserProfile" ToRole="Playlists" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="DatabaseModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_Artists_Countries">
+          <End Role="Countries" Type="DatabaseModel.Countries" Multiplicity="0..1" />
+          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Artists">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Songs_Countries">
+          <End Role="Countries" Type="DatabaseModel.Countries" Multiplicity="0..1" />
+          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistComment_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PlaylistComment" Type="DatabaseModel.PlaylistComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlaylistComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongComment_Songs">
+          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongComment" Type="DatabaseModel.SongComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongComment">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongComment_UserProfile">
+          <End Role="UserProfile" Type="DatabaseModel.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SongComment" Type="DatabaseModel.SongComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SongComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SongCategory">
+          <End Role="Categories" Type="DatabaseModel.Categories" Multiplicity="*" />
+          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
+        </Association>
+        <Association Name="SongSinger">
+          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
+          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
+        </Association>
+        <Association Name="SongWriter">
+          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
+          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
+        </Association>
+        <Association Name="UserLikeArtist">
+          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
+          <End Role="UserProfile" Type="DatabaseModel.UserProfile" Multiplicity="*" />
+        </Association>
+        <Association Name="UserLikeSong">
+          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
+          <End Role="UserProfile" Type="DatabaseModel.UserProfile" Multiplicity="*" />
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="DatabaseModel.webpages_Roles" Multiplicity="*" />
+          <End Role="UserProfile" Type="DatabaseModel.UserProfile" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Playlists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="View" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="LastUpdate" Precision="3" />
+          <Property Type="DateTime" Name="StaffPickedTime" Precision="3" />
+          <NavigationProperty Name="Comments" Relationship="DatabaseModel.FK_PlaylistComment_Playlists" FromRole="Playlists" ToRole="PlaylistComment" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.FK_Playlists_UserProfile" FromRole="Playlists" ToRole="UserProfile" />
+          <NavigationProperty Name="SongsInPlaylist" Relationship="DatabaseModel.FK_SongPlaylist_InPlaylists" FromRole="Playlists" ToRole="SongPlaylist" />
+          <NavigationProperty Name="LikedUsers" Relationship="DatabaseModel.UserLikePlaylist" FromRole="Playlists" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="SongPlaylist">
+          <Key>
+            <PropertyRef Name="SongId" />
+            <PropertyRef Name="PlaylistId" />
+          </Key>
+          <Property Type="Int32" Name="SongId" Nullable="false" />
+          <Property Type="Int32" Name="PlaylistId" Nullable="false" />
+          <Property Type="Int32" Name="Order" Nullable="false" />
+          <NavigationProperty Name="Playlist" Relationship="DatabaseModel.FK_SongPlaylist_InPlaylists" FromRole="SongPlaylist" ToRole="Playlists" />
+          <NavigationProperty Name="SongInfo" Relationship="DatabaseModel.FK_SongPlaylist_HasSongs" FromRole="SongPlaylist" ToRole="Songs" />
+        </EntityType>
+        <Association Name="FK_PlaylistComment_Playlists">
+          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseModel.PlaylistComment" Role="PlaylistComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlaylistComment">
+              <PropertyRef Name="PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlists_UserProfile">
+          <End Type="DatabaseModel.UserProfile" Role="UserProfile" Multiplicity="0..1" />
+          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongPlaylist_InPlaylists">
+          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseModel.SongPlaylist" Role="SongPlaylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongPlaylist">
+              <PropertyRef Name="PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SongPlaylist_HasSongs">
+          <End Type="DatabaseModel.Songs" Role="Songs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseModel.SongPlaylist" Role="SongPlaylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SongPlaylist">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserLikePlaylist">
+          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="*" />
+          <End Type="DatabaseModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="DatabaseModel.Artists">
+              <MappingFragment StoreEntitySet="Artists">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="View" ColumnName="View" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DatabaseModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="DatabaseModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaylistComment">
+            <EntityTypeMapping TypeName="DatabaseModel.PlaylistComment">
+              <MappingFragment StoreEntitySet="PlaylistComment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PlaylistId" ColumnName="PlaylistId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SongComment">
+            <EntityTypeMapping TypeName="DatabaseModel.SongComment">
+              <MappingFragment StoreEntitySet="SongComment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SongId" ColumnName="SongId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="DatabaseModel.Songs">
+              <MappingFragment StoreEntitySet="Songs">
+                <ScalarProperty Name="Lyrics" ColumnName="Lyrics" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="MusicFile" ColumnName="MusicFile" />
+                <ScalarProperty Name="VideoFile" ColumnName="VideoFile" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Download" ColumnName="Download" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="StaffPickedTime" ColumnName="StaffPickedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="DatabaseModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="DatabaseModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="DatabaseModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SongCategory" TypeName="DatabaseModel.SongCategory" StoreEntitySet="SongCategory">
+            <EndProperty Name="Categories">
+              <ScalarProperty Name="Id" ColumnName="CategoryId" />
+            </EndProperty>
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="Id" ColumnName="SongId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SongSinger" TypeName="DatabaseModel.SongSinger" StoreEntitySet="SongSinger">
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="Id" ColumnName="SingerId" />
+            </EndProperty>
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="Id" ColumnName="SongId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SongWriter" TypeName="DatabaseModel.SongWriter" StoreEntitySet="SongWriter">
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="Id" ColumnName="WriterId" />
+            </EndProperty>
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="Id" ColumnName="SongId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserLikeArtist" TypeName="DatabaseModel.UserLikeArtist" StoreEntitySet="UserLikeArtist">
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="Id" ColumnName="ArtistId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserLikeSong" TypeName="DatabaseModel.UserLikeSong" StoreEntitySet="UserLikeSong">
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="Id" ColumnName="SongId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="DatabaseModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Playlists">
+            <EntityTypeMapping TypeName="DatabaseModel.Playlists">
+              <MappingFragment StoreEntitySet="Playlists">
+                <ScalarProperty Name="StaffPickedTime" ColumnName="StaffPickedTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SongPlaylist">
+            <EntityTypeMapping TypeName="DatabaseModel.SongPlaylist">
+              <MappingFragment StoreEntitySet="SongPlaylist">
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="PlaylistId" ColumnName="PlaylistId" />
+                <ScalarProperty Name="SongId" ColumnName="SongId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserLikePlaylist" TypeName="DatabaseModel.UserLikePlaylist" StoreEntitySet="UserLikePlaylist">
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Playlists">
+              <ScalarProperty Name="Id" ColumnName="PlaylistId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

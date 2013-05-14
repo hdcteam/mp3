@@ -1,0 +1,10 @@
+﻿@model MP3.Models.UserProfile
+
+@if (Model.Image == null)
+{
+    <img src="~/Upload/images/avatars/no-avt/no-avt.jpg" alt="@Model.UserName" />
+}
+else
+{
+    <img src="~/Upload/images/avatars/@Model.Image" alt="@Model.UserName" />
+}

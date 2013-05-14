@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MP3.Models.Playlists>
+
+<ul>
+
+@foreach (var item in Model) {
+    <li>@Html.ActionLink(item.Name, "Details", "Playlist", new { id = item.Id, title = item.Name.Replace(" ", ",") }, null)</li>
+}
+
+</ul>

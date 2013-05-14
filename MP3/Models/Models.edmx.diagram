@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfe4ea2c88284083a6660ff525574729" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="DatabaseModel.Artists" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Categories" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Countries" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.PlaylistComment" Width="1.5" PointX="12.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.SongComment" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Songs" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.UserProfile" Width="1.5" PointX="11" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.webpages_Membership" Width="4" PointX="7.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.webpages_Roles" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK_Artists_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Songs_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PlaylistComment_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_SongComment_Songs" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_SongComment_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.SongCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.SongSinger" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.SongWriter" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.UserLikeArtist" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.UserLikeSong" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.webpages_UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DatabaseModel.Playlists" Width="1.5" PointX="14.875" PointY="8.875" />
+        <EntityTypeShape EntityType="DatabaseModel.SongPlaylist" Width="1.5" PointX="17.875" PointY="10.375" />
+        <AssociationConnector Association="DatabaseModel.FK_PlaylistComment_Playlists" />
+        <AssociationConnector Association="DatabaseModel.FK_Playlists_UserProfile" />
+        <AssociationConnector Association="DatabaseModel.FK_SongPlaylist_InPlaylists" />
+        <AssociationConnector Association="DatabaseModel.FK_SongPlaylist_HasSongs" />
+        <AssociationConnector Association="DatabaseModel.UserLikePlaylist" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

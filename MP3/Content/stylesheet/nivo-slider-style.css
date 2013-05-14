@@ -1,0 +1,30 @@
+.nivoSlider {
+    position:relative;
+    background:url(../images/slide-themes/default/loading.gif) no-repeat 50% 50%;
+    height: 250px;
+}
+.nivoSlider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+    height: 250px;
+}
+.nivoSlider a {
+    border:0;
+    display:block;
+}
+
+.nivoSlider .nivo-prevNav {
+	background: url(../images/slide-themes/default/arrows.png);
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+}
+
+.nivoSlider .nivo-nextNav {
+	background: url(../images/slide-themes/default/arrows.png) top right;
+	width: 30px;
+	height: 30px;
+	margin-right: 5px;
+}

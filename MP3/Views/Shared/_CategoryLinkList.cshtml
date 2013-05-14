@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MP3.Models.Categories>
+
+@for (int i = 0; i < Model.Count(); i++)
+{
+    MP3.Models.Categories item = Model.ElementAt(i);
+    @Html.ActionLink(item.Name, "Details", "Category", new { id = item.Id, title = item.Name.Replace(" ", ",") }, null);
+    if (i < Model.Count() - 1)
+    {
+        @Html.DisplayText(", ");
+    }
+}
+
+@if (Model.Count() == 0) {
+    <span>Đang cập nhật</span>
+}
+
