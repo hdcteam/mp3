@@ -1,4 +1,4 @@
-﻿// Default code generation is disabled for model 'D:\HoangHai\BTL\Web\MP3\MP3\Models\Models.edmx'. 
+﻿// Default code generation is disabled for model 'D:\HoangHai\BTL\ASP\mp3\MP3\Models\Models.edmx'. 
 // To enable default code generation, change the value of the 'Code Generation Strategy' designer
 // property to an alternate value. This property is available in the Properties Window when the model is
 // open in the designer.

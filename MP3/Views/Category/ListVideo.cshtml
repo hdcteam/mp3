@@ -5,7 +5,7 @@
 
 <div class="t3-module module no-padding mod-views  title-yellow" id="Mod69">
     <div class="module-inner">
-        <h3 class="module-title"><span>Danh sách nhạc</span></h3>
+        <h3 class="module-title"><span>Danh sách video trong: @ViewBag.category.Name</span></h3>
         <div class="module-ct">
             @if (Model.Count > 0) {
             <ul id="ja-ul-lastnews" class="category-module no-padding mod-views title-yellow vertical-layout">
@@ -16,7 +16,14 @@
                     <div class="showcategory">
                         <!-- Intro images -->
                         <div class="img-intro">
-                            <img src="~/Content/images/play.png" alt="">
+                            @if (song.Image == null)
+                            {
+                                <img src="~/Content/images/play.png" alt="Nghe nhạc">
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/@song.Image" alt="Nghe nhạc">
+                            }
                         </div>
                         <!-- End add -->
                         <div class="jacontent clearfix">
@@ -63,19 +70,22 @@
                 }
             </ul>
             }
-            else {
+            else
+            {
                 <div class="no-item">Chưa có có bài hát nào!</div>
             }
         </div>
 
-        @if (Model.Count > 0) {
+        @if (Model.Count > 0)
+        {
         <div id="list-pager">
         </div>
         }
     </div>
 </div>
 
-@if (Model.Count > 0) {
+@if (Model.Count > 0)
+{
     <text>
     @Scripts.Render("~/Content/js/jquery.paginate.js")
     @Styles.Render("~/Content/stylesheet/paginate-style.css");
@@ -93,7 +103,7 @@
                 background_hover_color: '#CFCFCF',
                 mouse: 'press',
                 onChange     			: function(page){
-                    document.location = '/Music/@ViewBag.id/@ViewBag.categoryTitle/' + page;
+                    document.location = '/Video/@ViewBag.id/@ViewBag.categoryTitle/' + page;
                 }
             });
         });

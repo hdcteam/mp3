@@ -1,261 +1,261 @@
 ﻿@using MP3.Models;
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@ViewBag.Title</title>
-        @Styles.Render("~/Content/stylesheet")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/nivo")
-    </head>
-    <body>
-        <section class="wrap ja-topheader">
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="span8">
-                        <div class="top-menu">
-                            <ul class="nav ">
-                                <li><a href="#">Giới thiệu</a></li>
-                                <li><a href="#">Điều khoản sử dụng</a></li>
-                                <li><a href="#">Chính sách riêng tư</a></li>
-                                <li><a href="#">Site map</a></li>
-                            </ul>
-                        </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/stylesheet")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/nivo")
+</head>
+<body>
+    <section class="wrap ja-topheader">
+        <div class="container">
+            <div class="row">
+
+                <div class="span8">
+                    <div class="top-menu">
+                        <ul class="nav ">
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#">Điều khoản sử dụng</a></li>
+                            <li><a href="#">Chính sách riêng tư</a></li>
+                            <li><a href="#">Site map</a></li>
+                        </ul>
                     </div>
-                    
-                    <div class="span4">
-                        <div class="top-login">
-                            <ul>
+                </div>
+
+                <div class="span4">
+                    <div class="top-login">
+                        <ul>
+                            @if (ViewBag.CurrentUser == null)
+                            {
                                 <li class="first">
-                                    <a class="login-switch" href="#"  title="Đăng nhập"><span>Đăng nhập</span></a>
+                                    @Html.ActionLink("Đăng nhập", "Login", "Account", null, new { @class = "login" })
                                 </li>
                                 <li>
-                                    <a class="register-switch" href="#">
-                                    <span>Tạo tài khoản</span>
-                                    </a>
+                                    @Html.ActionLink("Tạo tài khoản", "Register", "Account", null, new { @class = "register" })
                                 </li>
                                 <!--LOFIN FORM content-->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- HEADER -->
-        <header id="ja-header" class="ja-header wrap">
-            <div class="container">
-                <div class="row">
-                    <!-- LOGO -->
-                    <div class="span8">
-                        <div class="logo logo-image">
-
-                        </div>
-                    </div>
-                    <!-- //LOGO -->
-                    <div class="span4">
-                        
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- MAIN NAVIGATION -->
-        <nav id="ja-mainnav" class="wrap ja-mainnav navbar-collapse-fixed-top">
-            <div class="container navbar">
-                <div class="navbar-inner">
-                    
-                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <div class="left-mainnav">&nbsp;</div>
-                    <div class="nav-collapse collapse always-show">
-                        <div class="t3-megamenu">
-                            <ul class="nav level0">
-                                <li class="current active">
-                                    @Html.ActionLink("Trang chủ", "Index", "Home");
+                            }
+                            else
+                            {
+                                <li class="first">
+                                    @{string username = ViewBag.CurrentUser.UserName;}
+                                    @Html.ActionLink(username, "Manage", "Account", null, new { @class = "username" })
                                 </li>
                                 <li>
-                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">MP3 <b class="caret"></b></a>
-                                    <div class="sub-menu">
-                                        <ul>
-                                            @foreach (Categories cat in ViewBag.Categories){
-                                                <li>@Html.ActionLink(cat.Name, "ListMusic", "Category", new { id = cat.Id, title = cat.Name.Replace(" ", "-") }, null)</li>
-                                            }
-                                        </ul>
-                                    </div>
+                                    @Html.ActionLink("Hồ sơ", "Manage", "Account", null, new { @class = "setting" })
                                 </li>
                                 <li>
-                                    <a class="dropdown-toggle" href="/ja_mitius/mega-news.html" data-toggle="dropdown">Music Video <b class="caret"></b></a>
-                                    <div class="sub-menu">
-                                        <ul>
-                                            <li><a href="#">Việt Nam</a></li>
-                                            <li><a href="#">Nhạc Trẻ</a></li>
-                                            <li><a href="#">Nhạc Trữ Tình</a></li>
-                                            <li><a href="#">Nhạc Quê Hương</a></li>
-                                            <li><a href="#">Nhạc Cách Mạng</a></li>
-                                            <li><a href="#">Nhạc Thiếu Nhi</a></li>
-                                            <li><a href="#">Rock Việt</a></li>
-                                            <li><a href="#">Rap Việt</a></li>
-                                            <li><a href="#">Âu Mỹ</a></li>
-                                            <li><a href="#">Pop</a></li>
-                                            <li><a href="#">Rock</a></li>
-                                            <li><a href="#">Rap / Hip Hop</a></li>
-                                            <li><a href="#">Electronic / Dance</a></li>
-                                            <li><a href="#">Audiophile</a></li>
-                                            <li><a href="#">Hàn Quốc</a></li>
-                                            <li><a href="#">Nhật Bản</a></li>
-                                            <li><a href="#">Hoa Ngữ</a></li>
-                                            <li><a href="#">Hòa Tấu</a></li>
-                                        </ul>
-                                    </div>
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a id="logout" href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
+                                    }
                                 </li>
-                                <li>
-                                    <a class="dropdown-toggle" href="/ja_mitius/k2.html" data-toggle="dropdown">Album <b class="caret"></b></a>
-                                    <div class="sub-menu">
-                                        <ul>
-                                            <li><a href="#">Việt Nam</a></li>
-                                            <li><a href="#">Nhạc Trẻ</a></li>
-                                            <li><a href="#">Nhạc Trữ Tình</a></li>
-                                            <li><a href="#">Nhạc Quê Hương</a></li>
-                                            <li><a href="#">Nhạc Cách Mạng</a></li>
-                                            <li><a href="#">Nhạc Thiếu Nhi</a></li>
-                                            <li><a href="#">Rock Việt</a></li>
-                                            <li><a href="#">Rap Việt</a></li>
-                                            <li><a href="#">Âu Mỹ</a></li>
-                                            <li><a href="#">Pop</a></li>
-                                            <li><a href="#">Rock</a></li>
-                                            <li><a href="#">Rap / Hip Hop</a></li>
-                                            <li><a href="#">Electronic / Dance</a></li>
-                                            <li><a href="#">Audiophile</a></li>
-                                            <li><a href="#">Hàn Quốc</a></li>
-                                            <li><a href="#">Nhật Bản</a></li>
-                                            <li><a href="#">Hoa Ngữ</a></li>
-                                            <li><a href="#">Hòa Tấu</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="" href="#">Ca sỹ </a>
-                                </li>
-                                <li>
-                                    <a class=" dropdown-toggle" href="#" data-toggle="dropdown">Bảng xếp hạng <b class="caret"></b></a>
-                                </li>
-                                <li>
-                                    <a class="" href="#">Sự kiện</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="right-mainnav">&nbsp;</div>
-                </div>
-            </div>
-        </nav>
-        <!-- TOP BAR -->
-        <section class="wrap ja-topbar">
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="span8">
-                        <div class="top-menu">
-                            <div class="ja-healineswrap">
-                                <em>Tin mới:</em>
-                                <div id="jalh-modid131" class="ja-headlines ">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="span4 clearfix">
-                        <div class="head-search">
-                            <form class="form-search" action="/ja_mitius/" method="post">
-                                <div class="search">
-                                    <label for="mod-search-searchword">Tìm kiếm...</label><input name="searchword" id="mod-search-searchword" maxlength="20" class="input" type="text" size="20" placeholder="Search...">
-                                    <input type="hidden" name="task" value="search">
-                                    <input type="hidden" name="option" value="com_search">
-                                    <input type="hidden" name="Itemid" value="435">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="aaa">
-                            
-                            <div class="custom social">
-                                <ul class="social-list">
-                                    <li class="facebook first"><a href="#" title="Facebook">Facebook</a></li>
-                                    <li class="twitter"><a href="#" title="Twitter">Twitter</a></li>
-                                    <li class="feed "><a href="#" title="Feed">Feed</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- HEADING SLIDE -->
-        <div class="wrap ja-slideshow">
-            <div class="container">
-                <div class="row">
-                    <div class="left-slideshow span8">
-                        <div class="main-slideshow">
-                            <div id="slider">
-                                <img src="~/Content/images/slide/1.jpg" alt="" />
-                                <img src="~/Content/images/slide/2.jpg" alt="" />
-                                <img src="~/Content/images/slide/3.jpg" alt="" />
-                                <img src="~/Content/images/slide/4.jpg" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-slideshow span4">
-                        <a href="#"><img src="~/Content/images/ads/yan.jpg" alt="Yan TV" /></a>
+                                <!--LOFIN FORM content-->
+                            }
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-<!-- MAIN BODY -->
-<section id="ja-mainbody" class="ja-mainbody wrap">
-    <div class="container">
-        <div class="row">
-            <div id="ja-content" class="ja-content span8">
-                <div class="main-content">
-                    @RenderSection("featured", required: false)
-                    @RenderBody()
+    </section>
+    <!-- HEADER -->
+    <header id="ja-header" class="ja-header wrap">
+        <div class="container">
+            <div class="row">
+                <!-- LOGO -->
+                <div class="span8">
+                    <div class="logo logo-image">
+                    </div>
+                </div>
+                <!-- //LOGO -->
+                <div class="span4">
                 </div>
             </div>
-            <div class="ja-sidebar span4">
-                <div class="row">
-                    <!-- SIDEBAR 2 -->
-                    <div class="ja-sidebar ja-sidebar-2 span4">
-                        <div class="main-siderbar masonry">
-                            <div class="t3-module module masonry-brick">
-                                <div class="module-inner">
-                                    <h3 class="module-title"><span>Ca sỹ nổi bật</span></h3>
-                                    <div class="module-ct">
-                                        <div id="k2ModuleBox89" class="k2ArchivesBlock">
-                                            <ul>
-                                                <li><a title="Akira Phan" href="#">Akira Phan</a></li>
-                                                <li><a title="Bảo Thy" href="#">Bảo Thy</a></li>
-                                                <li><a title="Bằng Cường" href="#">Bằng Cường</a></li>
-                                                <li><a title="Bùi Anh Tuấn" href="#">Bùi Anh Tuấn</a></li>
-                                                <li><a title="Cao Thái Sơn" href="#">Cao Thái Sơn</a></li>
-                                                <li><a title="Cẩm Ly" href="#">Cẩm Ly</a></li>
-                                                <li><a title="Châu Khải Phong" href="#">Châu Khải Phong</a></li>
-                                                <li><a title="Chi Dân" href="#">Chi Dân</a></li>
-                                                <li><a title="Dương Ngọc Thái" href="#">Dương Ngọc Thái</a></li>
-                                                <li><a title="Dương Triệu Vũ" href="#">Dương Triệu Vũ</a></li>
-                                                <li><a title="Đàm Vĩnh Hưng" href="#">Đàm Vĩnh Hưng</a></li>
-                                                <li><a title="Đan Trường" href="#">Đan Trường</a></li>
-                                                <li><a title="Đông Nhi" href="#">Đông Nhi</a></li>
-                                                <li><a title="HKT" href="#">HKT</a></li>
-                                                <li><a title="Hồ Ngọc Hà" href="#">Hồ Ngọc Hà</a></li>
-                                                <li><a title="Hồ Quang Hiếu" href="#">Hồ Quang Hiếu</a></li>
-                                                <li><a title="Hồ Quỳnh Hương" href="#">Hồ Quỳnh Hương</a></li>
-                                            </ul>
+        </div>
+    </header>
+    <!-- MAIN NAVIGATION -->
+    <nav id="ja-mainnav" class="wrap ja-mainnav navbar-collapse-fixed-top">
+        <div class="container navbar">
+            <div class="navbar-inner">
+
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="left-mainnav">&nbsp;</div>
+                <div class="nav-collapse collapse always-show">
+                    <div class="t3-megamenu">
+                        <ul class="nav level0">
+                            <li class="current active">
+                                @Html.ActionLink("Trang chủ", "Index", "Home");
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">MP3 <b class="caret"></b></a>
+                                <div class="sub-menu">
+                                    <ul>
+                                        @foreach (Categories cat in ViewBag.Categories)
+                                        {
+                                            <li>@Html.ActionLink(cat.Name, "ListMusic", "Category", new { id = cat.Id, title = cat.Name.Replace(" ", "-") }, null)</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Music Video <b class="caret"></b></a>
+                                <div class="sub-menu">
+                                    <ul>
+                                        @foreach (Categories cat in ViewBag.Categories)
+                                        {
+                                            <li>@Html.ActionLink(cat.Name, "ListVideo", "Category", new { id = cat.Id, title = cat.Name.Replace(" ", "-") }, null)</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Album <b class="caret"></b></a>
+                                <div class="sub-menu">
+                                    <ul>
+                                        @foreach (Categories cat in ViewBag.Categories)
+                                        {
+                                            <li>@Html.ActionLink(cat.Name, "ListAlbum", "Category", new { id = cat.Id, title = cat.Name.Replace(" ", "-") }, null)</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="" href="#">Ca sỹ</a>
+                                <div class="sub-menu">
+                                    <ul>
+                                        @foreach (Countries contry in ViewBag.Countries)
+                                        {
+                                            <li>@Html.ActionLink(contry.Name, "Index", "Artist", new { id = contry.Id, title = contry.Name.Replace(" ", "-") }, null)</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class=" dropdown-toggle" href="#" data-toggle="dropdown">Bảng xếp hạng <b class="caret"></b></a>
+                            </li>
+                            <li>
+                                <a class="" href="#">Sự kiện</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right-mainnav">&nbsp;</div>
+            </div>
+        </div>
+    </nav>
+    <!-- TOP BAR -->
+    <section class="wrap ja-topbar">
+        <div class="container">
+            <div class="row">
+
+                <div class="span8">
+                    <div class="top-menu">
+                        <div class="ja-healineswrap">
+                            <em>Tin mới:</em>
+                            <div id="jalh-modid131" class="ja-headlines ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span4 clearfix">
+                    <div class="head-search">
+                        <form class="form-search" action="/ja_mitius/" method="post">
+                            <div class="search">
+                                <label for="mod-search-searchword">Tìm kiếm...</label><input name="searchword" id="mod-search-searchword" maxlength="20" class="input" type="text" size="20" placeholder="Search...">
+                                <input type="hidden" name="task" value="search">
+                                <input type="hidden" name="option" value="com_search">
+                                <input type="hidden" name="Itemid" value="435">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="aaa">
+
+                        <div class="custom social">
+                            <ul class="social-list">
+                                <li class="facebook first"><a href="#" title="Facebook">Facebook</a></li>
+                                <li class="twitter"><a href="#" title="Twitter">Twitter</a></li>
+                                <li class="feed "><a href="#" title="Feed">Feed</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- HEADING SLIDE -->
+    <div class="wrap ja-slideshow">
+        <div class="container">
+            <div class="row">
+                <div class="left-slideshow span8">
+                    <div class="main-slideshow">
+                        <div id="slider">
+                            <img src="~/Content/images/slide/1.jpg" alt="" />
+                            <img src="~/Content/images/slide/2.jpg" alt="" />
+                            <img src="~/Content/images/slide/3.jpg" alt="" />
+                            <img src="~/Content/images/slide/4.jpg" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="right-slideshow span4">
+                    <a href="#">
+                        <img src="~/Content/images/ads/yan.jpg" alt="Yan TV" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MAIN BODY -->
+    <section id="ja-mainbody" class="ja-mainbody wrap">
+        <div class="container">
+            <div class="row">
+                <div id="ja-content" class="ja-content span8">
+                    <div class="main-content">
+                        @RenderSection("featured", required: false)
+                        @RenderBody()
+                    </div>
+                </div>
+                <div class="ja-sidebar span4">
+                    <div class="row">
+                        <!-- SIDEBAR 2 -->
+                        <div class="ja-sidebar ja-sidebar-2 span4">
+                            <div class="main-siderbar masonry">
+                                <div class="t3-module module masonry-brick">
+                                    <div class="module-inner">
+                                        <h3 class="module-title"><span>Ca sỹ nổi bật</span></h3>
+                                        <div class="module-ct">
+                                            <div id="k2ModuleBox89" class="k2ArchivesBlock">
+                                                <ul>
+                                                    <li><a title="Akira Phan" href="#">Akira Phan</a></li>
+                                                    <li><a title="Bảo Thy" href="#">Bảo Thy</a></li>
+                                                    <li><a title="Bằng Cường" href="#">Bằng Cường</a></li>
+                                                    <li><a title="Bùi Anh Tuấn" href="#">Bùi Anh Tuấn</a></li>
+                                                    <li><a title="Cao Thái Sơn" href="#">Cao Thái Sơn</a></li>
+                                                    <li><a title="Cẩm Ly" href="#">Cẩm Ly</a></li>
+                                                    <li><a title="Châu Khải Phong" href="#">Châu Khải Phong</a></li>
+                                                    <li><a title="Chi Dân" href="#">Chi Dân</a></li>
+                                                    <li><a title="Dương Ngọc Thái" href="#">Dương Ngọc Thái</a></li>
+                                                    <li><a title="Dương Triệu Vũ" href="#">Dương Triệu Vũ</a></li>
+                                                    <li><a title="Đàm Vĩnh Hưng" href="#">Đàm Vĩnh Hưng</a></li>
+                                                    <li><a title="Đan Trường" href="#">Đan Trường</a></li>
+                                                    <li><a title="Đông Nhi" href="#">Đông Nhi</a></li>
+                                                    <li><a title="HKT" href="#">HKT</a></li>
+                                                    <li><a title="Hồ Ngọc Hà" href="#">Hồ Ngọc Hà</a></li>
+                                                    <li><a title="Hồ Quang Hiếu" href="#">Hồ Quang Hiếu</a></li>
+                                                    <li><a title="Hồ Quỳnh Hương" href="#">Hồ Quỳnh Hương</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -265,8 +265,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <!-- FOOTER -->
     <footer id="ja-footer" class="wrap ja-footer">
         <section class="ja-copyright">

@@ -4,124 +4,142 @@
     ViewBag.Title = Model.Name;
 }
 
-<div class="song-detail">
-    <div class="title">
-        <h1>
-            @Model.Name
-            - 
+@Styles.Render("~/Content/stylesheet/song-details.css")
+
+<div class="t3-module module no-padding mod-views  title-yellow" id="Mod69">
+    <div class="module-inner">
+        <div class="song-detail">
+            <div class="title">
+                <h3>
+                    @Model.Name
+                    - 
         <span class="singer-name">
             @{Html.RenderPartial("~/Views/Shared/_ArtistList.cshtml", Model.Singers);}
         </span>
-        </h1>
-    </div>
-    <div class="info">
-        <span class="writer">Sáng tác: @{Html.RenderPartial("~/Views/Shared/_ArtistList.cshtml", Model.Writers);}
-        </span>
-        @{var playlist = Model.SongPlaylist.Where(p => p.Playlist.User == null);}
-        @if (playlist.Count() > 0)
-        {
-            @:|
-            <span class="album">Album: @Html.ActionLink(playlist.First().Playlist.Name, "Details", "Playlist", new { id = playlist.First().Playlist.Id, title = playlist.First().Playlist.Name.Replace(" ", ",") }, null)
-            </span>
-        }
-        |
+                </h3>
+            </div>
+            <div class="info">
+                <span class="writer">Sáng tác: @{Html.RenderPartial("~/Views/Shared/_ArtistList.cshtml", Model.Writers);}
+                </span>
+                @{var playlist = Model.SongPlaylist.Where(p => p.Playlist.User == null);}
+                @if (playlist.Count() > 0)
+                {
+                    @:|
+                    <span class="album">Album: @Html.ActionLink(playlist.First().Playlist.Name, "Details", "Playlist", new { id = playlist.First().Playlist.Id, title = playlist.First().Playlist.Name.Replace(" ", ",") }, null)
+                    </span>
+                }
+                |
         <span>Thể loại: @{Html.RenderPartial("~/Views/Shared/_CategoryLinkList.cshtml", Model.Categories);}
         </span>
-        |   
+                |   
         <span>Lượt nghe: @Model.View.ToString()
         </span>
-    </div>
+            </div>
 
-    @{Html.RenderPartial("~/Views/Shared/_MusicPlayer.cshtml", Model);}
+            @{Html.RenderPartial("~/Views/Shared/_MusicPlayer.cshtml", Model);}
 
-    <div class="tools">
-        <ul>
-            <li><a href="javascript:;">Thêm vào playlist</a>
+            <div class="tools clearfix">
                 <ul>
-                    <li><a href="#">Playlist 1</a></li>
-                    <li><a href="#">Playlist 2</a></li>
-                    <li class="to-new-playlist"><a href="#">Thêm vào playlist mới</a></li>
-                </ul>
-            </li>
-            <li><a href="javascript:;">Tải về máy</a></li>
-            <li><a href="javascript:;">Chia sẻ</a></li>
-        </ul>
-    </div>
-
-    <div class="lyrics">
-        <div class="title">Lời bài hát</div>
-        <div class="content">
-            @if (Model.Lyrics == null)
-            {
-                <span class="no-lyric">Chưa có lời bài hát!</span>
-            }
-            else
-            {
-                @Model.Lyrics
-            }
-        </div>
-    </div>
-
-    <div class="comment">
-        <div class="title">Bình luận</div>
-        <div class="new-comment">
-            @if (ViewBag.CurrentUser != null)
-            {
-                <div class="comment-details">
-                    @using (Html.BeginForm())
+                    <li><a href="javascript:;">Thêm vào playlist</a>
+                        <ul>
+                            @if (ViewBag.CurrentUser != null)
+                            {
+                                foreach (MP3.Models.Playlists uPlaylist in ViewBag.CurrentUser.Playlists)
+                                {
+                                <li>@Html.ActionLink(uPlaylist.Name, "Add", "Playlist", new { id = Model.Id, pid = uPlaylist.Id }, null)</li>
+                                }
+                            }
+                            <li class="new-playlist">@Html.ActionLink("Playlist mới", "Add", "Playlist", new { id = Model.Id }, null)</li>
+                        </ul>
+                    </li>
+                    @if (@Model.MusicFile != null)
                     {
-                        <div class="avatar">
-                            @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", (MP3.Models.UserProfile)ViewBag.CurrentUser, new ViewDataDictionary());}
-                        </div>
-                    <div class="details">
-                        <div class="content">
-                            @Html.TextArea("cmt-content");
-                        </div>
-                    </div>
+                        <li><a href="/Upload/musics/@Model.MusicFile" title="Nhấn chuột phải chọn Save as ...">Tải về máy</a></li>
                     }
-                
-                </div>
-                <div class="submit">
-                    <input type="submit" value="Đăng bình luận" />
-                </div>
-            }
-            else
-            {
-                <span class="need-login">Bạn cần @Html.ActionLink("đăng nhập", "Login", "Account") để đăng bình luận!</span>
-            }
-        </div>
-        @if (Model.Comments.Count > 0)
-        {
-            <div class="comment-list">
-                @foreach (MP3.Models.SongComment songCmt in Model.Comments)
-                {
-                    <div class="comment-details">
-                        <div class="avatar">
-                            @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", songCmt.User);}
-                        </div>
-                        <div class="details">
-                            <div class="info">
-                                <div class="username">
-                                    @songCmt.User.UserName
-                                </div>
-                                <div class="time">
-                                    @songCmt.PostTime.ToString()
-                                </div>
-                            </div>
+                    else
+                    {
+                        <li><a href="/Upload/musics/@Model.VideoFile" title="Nhấn chuột phải chọn Save as ...">Tải về máy</a></li>
+                    }
+                    <li><a href="javascript:;">Chia sẻ</a></li>
+                </ul>
+            </div>
 
-                            <div class="content">
-                                @songCmt.Content
-                            </div>
+            <div class="lyrics">
+                <div class="title">Lời bài hát</div>
+                <div class="content">
+                    @if (Model.Lyrics == null)
+                    {
+                        <span class="no-lyrics">Chưa có lời bài hát!</span>
+                    }
+                    else
+                    {
+                        @Model.Lyrics
+                    }
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="title">Bình luận</div>
+                <div class="new-comment clearfix">
+                    @if (ViewBag.CurrentUser != null)
+                    {
+                        <div class="comment-details">
+                            @using (Html.BeginForm())
+                            {
+                                <div class="avatar">
+                                    @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", (MP3.Models.UserProfile)ViewBag.CurrentUser, new ViewDataDictionary());}
+                                </div>
+                                <div class="details">
+                                    <div class="content">
+                                        @Html.TextArea("cmt-content")
+                                    </div>
+                                </div>
+                            }
+
                         </div>
+                        <div class="submit">
+                            <input type="submit" value="Đăng bình luận" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="need-login">Bạn cần @Html.ActionLink("đăng nhập", "Login", "Account") để đăng bình luận!</div>
+                    }
+                </div>
+                @if (Model.Comments.Count > 0)
+                {
+                    <div class="comment-list">
+                        @foreach (MP3.Models.SongComment songCmt in Model.Comments)
+                        {
+                            <div class="comment-details clearfix">
+                                <div class="avatar">
+                                    @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", songCmt.User);}
+                                </div>
+                                <div class="details">
+                                    <div class="info clearfix">
+                                        <div class="username">
+                                            @Html.ActionLink(songCmt.User.UserName, "Details", "UserProfile", new { id = songCmt.User.UserId }, null)
+                                        </div>
+                                        <div class="time">
+                                            @songCmt.PostTime.ToString()
+                                        </div>
+                                    </div>
+
+                                    <div class="content">
+                                        @songCmt.Content
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="no-comment">
+                        Chưa có bình luận nào!
                     </div>
                 }
             </div>
-        }
-        else
-        {
-            <div class="no-comment">
-                Chưa có bình luận nào!
-            </div>
-        }
+        </div>
     </div>
 </div>
