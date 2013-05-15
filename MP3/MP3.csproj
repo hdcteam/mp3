@@ -251,6 +251,7 @@
     <Content Include="Content\stylesheet\nivo-slider-style.css" />
     <Content Include="Content\stylesheet\nivo-slider.css" />
     <Content Include="Content\stylesheet\paginate-style.css" />
+    <Content Include="Content\stylesheet\song-details.css" />
     <Content Include="Content\stylesheet\style.css" />
     <Content Include="Content\stylesheet\system.css" />
     <Content Include="Content\images\ads\yan.jpg" />
@@ -392,6 +393,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Upload\images\avatars\no-avt\default.png" />
     <Content Include="Upload\musics\song.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -456,7 +458,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Upload\images\avatars\" />
     <Folder Include="Upload\videos\" />
   </ItemGroup>
   <ItemGroup>
