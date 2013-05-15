@@ -1,4 +1,4 @@
-.clearfix:before, .clearfix:after { display: table; content: ""; line-height: 0; }
+﻿.clearfix:before, .clearfix:after { display: table; content: ""; line-height: 0; }
 .clearfix:after { clear: both; }
 .module {
 background: #fff;
@@ -54,7 +54,7 @@ position: relative;
 }
 .vertical-layout .showcategory {
 min-height: 100px;
-padding: 0px 0 0 230px;
+padding: 0px 0 0 170px;
 position: relative;
 }
 .vertical-layout li .img-intro {
@@ -64,6 +64,8 @@ position: absolute;
 }
 .category-module > li .img-details img, .category-module > li .img-intro img {
 margin-bottom: 20px;
+width: 150px;
+height: 150px;
 }
 .jacontent h5 a {
 color: #444;
@@ -98,6 +100,8 @@ border-left: 1px solid #e5e5e5;
 margin-left: 5px;
 padding-left: 10px;
 }
+
+/* Công cụ trên mỗi bài hát trên danh sách */
 .jacontent .tool {margin: 15px 0;}
 .jacontent .tool>ul>li {display: inline-block; position: relative;}
 .jacontent .tool>ul>li>a {display: block; background: #333; padding: 9px 10px; color: white;}
@@ -107,6 +111,7 @@ padding-left: 10px;
 .jacontent .tool>ul>li>ul>li:hover {background: #f76000;}
 .jacontent .tool>ul>li>ul>li:hover>a {color: white;}
 .jacontent .tool>ul>li>ul>li:last-child {border: none;}
+.jacontent .tool > ul > li > ul > li.new-playlist { background: rgb(167, 204, 167); padding-left: 40px;}
 .jacontent .tool>ul>li:hover>ul {display: block;}
 
 #list-pager {width: 300px; margin: 0 auto;}

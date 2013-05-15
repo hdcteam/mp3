@@ -17,6 +17,7 @@ namespace MP3.Models
         public Categories()
         {
             this.Songs = new HashSet<Songs>();
+            this.Playlists = new HashSet<Playlists>();
         }
     
         public int Id { get; set; }
@@ -24,5 +25,6 @@ namespace MP3.Models
         public string Description { get; set; }
     
         public virtual ICollection<Songs> Songs { get; set; }
+        public virtual ICollection<Playlists> Playlists { get; set; }
     }
 }

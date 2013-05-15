@@ -16,6 +16,7 @@ namespace MP3.Controllers
         {
             Entities db = new Entities();
             ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Countries = db.Countries.ToList();
             base.OnActionExecuting(filterContext);
 
             if (User.Identity.IsAuthenticated)

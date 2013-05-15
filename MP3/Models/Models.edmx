@@ -9,6 +9,7 @@
           <EntitySet Name="Artists" EntityType="DatabaseModel.Store.Artists" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Categories" EntityType="DatabaseModel.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Countries" EntityType="DatabaseModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlaylistCategory" EntityType="DatabaseModel.Store.PlaylistCategory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PlaylistComment" EntityType="DatabaseModel.Store.PlaylistComment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Playlists" EntityType="DatabaseModel.Store.Playlists" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SongCategory" EntityType="DatabaseModel.Store.SongCategory" store:Type="Tables" Schema="dbo" />
@@ -27,6 +28,14 @@
           <AssociationSet Name="FK_Artists_Countries" Association="DatabaseModel.Store.FK_Artists_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Artists" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistCategory_Categories" Association="DatabaseModel.Store.FK_PlaylistCategory_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="PlaylistCategory" EntitySet="PlaylistCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistCategory_Playlists" Association="DatabaseModel.Store.FK_PlaylistCategory_Playlists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="PlaylistCategory" EntitySet="PlaylistCategory" />
           </AssociationSet>
           <AssociationSet Name="FK_PlaylistComment_Playlists" Association="DatabaseModel.Store.FK_PlaylistComment_Playlists">
             <End Role="Playlists" EntitySet="Playlists" />
@@ -146,6 +155,14 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PlaylistCategory">
+          <Key>
+            <PropertyRef Name="PlaylistId" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="PlaylistId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PlaylistComment">
           <Key>
@@ -306,6 +323,30 @@
             </Principal>
             <Dependent Role="Artists">
               <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistCategory_Categories">
+          <End Role="Categories" Type="DatabaseModel.Store.Categories" Multiplicity="1" />
+          <End Role="PlaylistCategory" Type="DatabaseModel.Store.PlaylistCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlaylistCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistCategory_Playlists">
+          <End Role="Playlists" Type="DatabaseModel.Store.Playlists" Multiplicity="1" />
+          <End Role="PlaylistCategory" Type="DatabaseModel.Store.PlaylistCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlaylistCategory">
+              <PropertyRef Name="PlaylistId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -683,6 +724,10 @@
             <End Role="Playlists" EntitySet="Playlists" />
             <End Role="UserProfile" EntitySet="UserProfile" />
           </AssociationSet>
+          <AssociationSet Name="PlaylistCategory1" Association="DatabaseModel.PlaylistCategory1">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Artists">
           <Key>
@@ -711,6 +756,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Songs" Relationship="DatabaseModel.SongCategory" FromRole="Categories" ToRole="Songs" />
+          <NavigationProperty Name="Playlists" Relationship="DatabaseModel.PlaylistCategory1" FromRole="Categories" ToRole="Playlists" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -918,6 +964,7 @@
           <NavigationProperty Name="User" Relationship="DatabaseModel.FK_Playlists_UserProfile" FromRole="Playlists" ToRole="UserProfile" />
           <NavigationProperty Name="SongsInPlaylist" Relationship="DatabaseModel.FK_SongPlaylist_InPlaylists" FromRole="Playlists" ToRole="SongPlaylist" />
           <NavigationProperty Name="LikedUsers" Relationship="DatabaseModel.UserLikePlaylist" FromRole="Playlists" ToRole="UserProfile" />
+          <NavigationProperty Name="Categories" Relationship="DatabaseModel.PlaylistCategory1" FromRole="Playlists" ToRole="Categories" />
         </EntityType>
         <EntityType Name="SongPlaylist">
           <Key>
@@ -987,6 +1034,10 @@
         <Association Name="UserLikePlaylist">
           <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="*" />
           <End Type="DatabaseModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+        </Association>
+        <Association Name="PlaylistCategory1">
+          <End Type="DatabaseModel.Categories" Role="Categories" Multiplicity="*" />
+          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1182,6 +1233,14 @@
             </EndProperty>
             <EndProperty Name="Playlists">
               <ScalarProperty Name="Id" ColumnName="PlaylistId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PlaylistCategory1" TypeName="DatabaseModel.PlaylistCategory1" StoreEntitySet="PlaylistCategory">
+            <EndProperty Name="Playlists">
+              <ScalarProperty Name="Id" ColumnName="PlaylistId" />
+            </EndProperty>
+            <EndProperty Name="Categories">
+              <ScalarProperty Name="Id" ColumnName="CategoryId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

@@ -31,20 +31,20 @@ div.jp-video {
 	background-color:#eee;
 }
 div.jp-audio {
-	width:420px;
+	width:660px;
 }
 div.jp-audio-stream {
 	width:182px;
 }
 div.jp-video-270p {
-	width:480px;
+	width:660px;
 }
 div.jp-video-360p {
-	width:640px;
+	width:660px;
 }
 div.jp-video-full {
 	/* Rules for IE6 (full-screen) */
-	width:480px;
+	width:460px;
 	height:270px;
 	/* Rules for IE7 (full-screen) - Otherwise the relative container causes other page items that are not position:static (default) to appear over the video/gui. */
 	position:static !important; position:relative;
@@ -117,7 +117,7 @@ div.jp-interface ul.jp-controls {
 }
 
 div.jp-audio ul.jp-controls {
-	width: 380px;
+	width: 660px;
 	padding:20px 20px 0 20px;
 }
 
@@ -210,7 +210,7 @@ div.jp-audio div.jp-progress {
 }
 div.jp-audio div.jp-type-single div.jp-progress {
 	left:110px;
-	width:186px;
+	width:400px;
 }
 div.jp-audio div.jp-type-playlist div.jp-progress {
 	left:166px;
@@ -254,7 +254,7 @@ a.jp-volume-max {
 
 div.jp-audio div.jp-type-single a.jp-mute,
 div.jp-audio div.jp-type-single a.jp-unmute {
-	margin-left: 210px;	
+	margin-left: 440px;	
 }
 div.jp-audio div.jp-type-playlist a.jp-mute,
 div.jp-audio div.jp-type-playlist a.jp-unmute {
@@ -318,7 +318,7 @@ div.jp-volume-bar {
 }
 div.jp-audio div.jp-volume-bar {
 	top:37px;
-	left:330px;
+	left:560px;
 }
 div.jp-audio-stream div.jp-volume-bar {
 	top:37px;
@@ -344,7 +344,7 @@ div.jp-audio div.jp-time-holder {
 }
 div.jp-audio div.jp-type-single div.jp-time-holder {
 	left:110px;
-	width:186px;
+	width:400px;
 }
 div.jp-audio div.jp-type-playlist div.jp-time-holder {
 	left:166px;
@@ -490,8 +490,8 @@ a.jp-video-play-icon {
 	width: 112px;
 	height: 100px;
 
-	margin-left:-56px;
-	margin-top:-50px;
+	margin-left:-60px;
+	margin-top:-80px;
 	left:50%;
 	top:50%;
 
