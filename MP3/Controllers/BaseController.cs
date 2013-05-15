@@ -18,10 +18,9 @@ namespace MP3.Controllers
             ViewBag.Categories = db.Categories.ToList();
             base.OnActionExecuting(filterContext);
 
-            MembershipUser user = Membership.GetUser(User.Identity.Name);
-            if (user != null)
+            if (User.Identity.IsAuthenticated)
             {
-                CurrentUser = db.UserProfile.Where(u => u.UserName == user.UserName).First();
+                CurrentUser = db.UserProfile.Where(u => u.UserName == User.Identity.Name).First();
                 ViewBag.CurrentUser = CurrentUser;
             }
         }
