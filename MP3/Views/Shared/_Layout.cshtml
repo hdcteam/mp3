@@ -29,15 +29,30 @@
                     <div class="span4">
                         <div class="top-login">
                             <ul>
-                                <li class="first">
-                                    <a class="login-switch" href="#"  title="Đăng nhập"><span>Đăng nhập</span></a>
-                                </li>
-                                <li>
-                                    <a class="register-switch" href="#">
-                                    <span>Tạo tài khoản</span>
-                                    </a>
-                                </li>
-                                <!--LOFIN FORM content-->
+                                @if (ViewBag.CurrentUser == null)
+                                {
+                                    <li class="first">
+                                        @Html.ActionLink("Đăng nhập", "Login", "Account", null, new { @class = "login"})
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Tạo tài khoản", "Register", "Account", null, new { @class = "register"})
+                                    </li>
+                                    <!--LOFIN FORM content-->
+                                }
+                                else
+                                {
+                                    <li class="first">
+                                        @{string username = ViewBag.CurrentUser.UserName;}
+                                        @Html.ActionLink(username, "Manage", "Account", null, new { @class = "username"})
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Hồ sơ", "Manage", "Account", null, new { @class = "setting"})
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Thoát", "LogOff", "Account", null, new { @class = "logout"})
+                                    </li>
+                                    <!--LOFIN FORM content-->
+                                }
                             </ul>
                         </div>
                     </div>
@@ -89,57 +104,34 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-toggle" href="/ja_mitius/mega-news.html" data-toggle="dropdown">Music Video <b class="caret"></b></a>
+                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Music Video <b class="caret"></b></a>
                                     <div class="sub-menu">
                                         <ul>
-                                            <li><a href="#">Việt Nam</a></li>
-                                            <li><a href="#">Nhạc Trẻ</a></li>
-                                            <li><a href="#">Nhạc Trữ Tình</a></li>
-                                            <li><a href="#">Nhạc Quê Hương</a></li>
-                                            <li><a href="#">Nhạc Cách Mạng</a></li>
-                                            <li><a href="#">Nhạc Thiếu Nhi</a></li>
-                                            <li><a href="#">Rock Việt</a></li>
-                                            <li><a href="#">Rap Việt</a></li>
-                                            <li><a href="#">Âu Mỹ</a></li>
-                                            <li><a href="#">Pop</a></li>
-                                            <li><a href="#">Rock</a></li>
-                                            <li><a href="#">Rap / Hip Hop</a></li>
-                                            <li><a href="#">Electronic / Dance</a></li>
-                                            <li><a href="#">Audiophile</a></li>
-                                            <li><a href="#">Hàn Quốc</a></li>
-                                            <li><a href="#">Nhật Bản</a></li>
-                                            <li><a href="#">Hoa Ngữ</a></li>
-                                            <li><a href="#">Hòa Tấu</a></li>
+                                            @foreach (Categories cat in ViewBag.Categories){
+                                                <li>@Html.ActionLink(cat.Name, "ListVideo", "Category", new { id = cat.Id, title = cat.Name.Replace(" ", "-") }, null)</li>
+                                            }
                                         </ul>
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-toggle" href="/ja_mitius/k2.html" data-toggle="dropdown">Album <b class="caret"></b></a>
+                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Album <b class="caret"></b></a>
                                     <div class="sub-menu">
                                         <ul>
-                                            <li><a href="#">Việt Nam</a></li>
-                                            <li><a href="#">Nhạc Trẻ</a></li>
-                                            <li><a href="#">Nhạc Trữ Tình</a></li>
-                                            <li><a href="#">Nhạc Quê Hương</a></li>
-                                            <li><a href="#">Nhạc Cách Mạng</a></li>
-                                            <li><a href="#">Nhạc Thiếu Nhi</a></li>
-                                            <li><a href="#">Rock Việt</a></li>
-                                            <li><a href="#">Rap Việt</a></li>
-                                            <li><a href="#">Âu Mỹ</a></li>
-                                            <li><a href="#">Pop</a></li>
-                                            <li><a href="#">Rock</a></li>
-                                            <li><a href="#">Rap / Hip Hop</a></li>
-                                            <li><a href="#">Electronic / Dance</a></li>
-                                            <li><a href="#">Audiophile</a></li>
-                                            <li><a href="#">Hàn Quốc</a></li>
-                                            <li><a href="#">Nhật Bản</a></li>
-                                            <li><a href="#">Hoa Ngữ</a></li>
-                                            <li><a href="#">Hòa Tấu</a></li>
+                                            @foreach (Categories cat in ViewBag.Categories){
+                                                <li>@Html.ActionLink(cat.Name, "ListAlbum", "Category", new { id = cat.Id, title = cat.Name.Replace(" ", "-") }, null)</li>
+                                            }
                                         </ul>
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="" href="#">Ca sỹ </a>
+                                    <a class="" href="#">Ca sỹ</a>
+                                    <div class="sub-menu">
+                                        <ul>
+                                            @foreach (Countries contry in ViewBag.Countries){
+                                                <li>@Html.ActionLink(contry.Name, "Index", "Artist", new { id = contry.Id, title = contry.Name.Replace(" ", "-") }, null)</li>
+                                            }
+                                        </ul>
+                                    </div>
                                 </li>
                                 <li>
                                     <a class=" dropdown-toggle" href="#" data-toggle="dropdown">Bảng xếp hạng <b class="caret"></b></a>
