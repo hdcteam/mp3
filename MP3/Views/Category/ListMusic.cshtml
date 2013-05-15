@@ -44,9 +44,12 @@
                                 <ul>
                                     <li><a class="add-playlist" href="#">Thêm vào playlist</a>
                                         <ul>
-                                            @foreach (MP3.Models.Playlists playlist in ViewBag.CurrentUser.Playlists)
+                                            @if (ViewBag.CurrentUser != null)
                                             {
-                                                <li>@Html.ActionLink(playlist.Name, "Add", "Playlist", new { id = song.Id, pid = playlist.Id }, null)</li>
+                                                foreach (MP3.Models.Playlists playlist in ViewBag.CurrentUser.Playlists)
+                                                {
+                                                    <li>@Html.ActionLink(playlist.Name, "Add", "Playlist", new { id = song.Id, pid = playlist.Id }, null)</li>
+                                                }
                                             }
                                             <li class="new-playlist">@Html.ActionLink("Playlist mới", "Add", "Playlist", new { id = song.Id }, null)</li>
                                         </ul>
