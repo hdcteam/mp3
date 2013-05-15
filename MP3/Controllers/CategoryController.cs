@@ -123,7 +123,7 @@ namespace MP3.Controllers
             ViewBag.id = id;
             ViewBag.categoryTitle = title;
             ViewBag.category = category;
-            return View(category.Songs.ToPagedList(pageNumber, pageSize));
+            return View(category.Songs.Where(s => s.VideoFile == null).ToPagedList(pageNumber, pageSize));
         }
 
         protected override void Dispose(bool disposing)

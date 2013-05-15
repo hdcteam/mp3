@@ -393,10 +393,12 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Upload\images\1.jpg" />
     <Content Include="Upload\images\avatars\no-avt\default.png" />
     <Content Include="Upload\musics\song.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Upload\videos\video.mp4" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -458,7 +460,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Upload\videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
