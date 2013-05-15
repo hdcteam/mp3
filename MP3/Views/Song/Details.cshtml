@@ -52,7 +52,14 @@
                             <li class="new-playlist">@Html.ActionLink("Playlist mới", "Add", "Playlist", new { id = Model.Id }, null)</li>
                         </ul>
                     </li>
-                    <li><a href="javascript:;">Tải về máy</a></li>
+                    @if (@Model.MusicFile != null)
+                    {
+                        <li><a href="/Upload/musics/@Model.MusicFile" title="Nhấn chuột phải chọn Save as ...">Tải về máy</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Upload/musics/@Model.VideoFile" title="Nhấn chuột phải chọn Save as ...">Tải về máy</a></li>
+                    }
                     <li><a href="javascript:;">Chia sẻ</a></li>
                 </ul>
             </div>
