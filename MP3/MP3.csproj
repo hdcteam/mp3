@@ -457,6 +457,7 @@
     <Content Include="Views\Shared\_CategoryLinkList.cshtml" />
     <Content Include="Views\Shared\_MusicPlayer.cshtml" />
     <Content Include="Views\Shared\_AvatarDisplay.cshtml" />
+    <Content Include="Views\Category\ListVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

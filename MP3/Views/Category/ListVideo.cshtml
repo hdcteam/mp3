@@ -1,0 +1,112 @@
+﻿@model PagedList.IPagedList<MP3.Models.Songs>
+@{
+    ViewBag.Title = ViewBag.category.Name;
+}
+
+<div class="t3-module module no-padding mod-views  title-yellow" id="Mod69">
+    <div class="module-inner">
+        <h3 class="module-title"><span>Danh sách video trong: @ViewBag.category.Name</span></h3>
+        <div class="module-ct">
+            @if (Model.Count > 0) {
+            <ul id="ja-ul-lastnews" class="category-module no-padding mod-views title-yellow vertical-layout">
+                <!-- Group -->
+                <!-- Overridde add images of content -->
+                @foreach (MP3.Models.Songs song in Model) {
+                <li class="clearfix">
+                    <div class="showcategory">
+                        <!-- Intro images -->
+                        <div class="img-intro">
+                            @if (song.Image == null)
+                            {
+                                <img src="~/Content/images/play.png" alt="Nghe nhạc">
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/@song.Image" alt="Nghe nhạc">
+                            }
+                        </div>
+                        <!-- End add -->
+                        <div class="jacontent clearfix">
+                            <h5>
+                                @Html.ActionLink(song.Name, "Details", "Song", new { id = song.Id, title = song.Name.Replace(" ", ",") }, null)
+                            </h5>
+                                                
+                            <div class="article-aside clearfix">
+                                <span class="mod-articles-category-writtenby"><strong>Đăng lúc </strong>@song.CreatedTime.ToShortTimeString()</span>
+                                                    
+                                <span class="mod-articles-category-category"><strong>với chất lượng </strong>@song.Quality</span>
+                                                    
+                                <span class="mod-articles-category-hits">
+                                @song.View.ToString() lượt nghe
+                                </span>
+                                                    
+                            </div>
+                            <div class="mod-articles-category-introtext">
+                                <div>
+                                    Trình bày bởi:
+                                    @{Html.RenderPartial("~/Views/Shared/_ArtistList.cshtml", song.Singers);} | Quốc gia: @song.Country.Name
+                                </div>
+                            </div>
+                            <div class="tool">
+                                <ul>
+                                    <li><a class="add-playlist" href="#">Thêm vào playlist</a>
+                                        <ul>
+                                            @if (ViewBag.CurrentUser != null)
+                                            {
+                                                foreach (MP3.Models.Playlists playlist in ViewBag.CurrentUser.Playlists)
+                                                {
+                                                    <li>@Html.ActionLink(playlist.Name, "Add", "Playlist", new { id = song.Id, pid = playlist.Id }, null)</li>
+                                                }
+                                            }
+                                            <li class="new-playlist">@Html.ActionLink("Playlist mới", "Add", "Playlist", new { id = song.Id }, null)</li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="share" href="#">Chia sẻ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                }
+            </ul>
+            }
+            else
+            {
+                <div class="no-item">Chưa có có bài hát nào!</div>
+            }
+        </div>
+
+        @if (Model.Count > 0)
+        {
+        <div id="list-pager">
+        </div>
+        }
+    </div>
+</div>
+
+@if (Model.Count > 0)
+{
+    <text>
+    @Scripts.Render("~/Content/js/jquery.paginate.js")
+    @Styles.Render("~/Content/stylesheet/paginate-style.css");
+
+    <script type="text/javascript">
+        $(function () {
+            $("#list-pager").paginate({
+                count: @Model.PageCount.ToString(),
+                start: @Model.PageNumber.ToString(),
+                display: 10,
+                border: false,
+                text_color: 'black',
+                background_color: '#EEE',
+                text_hover_color: 'black',
+                background_hover_color: '#CFCFCF',
+                mouse: 'press',
+                onChange     			: function(page){
+                    document.location = '/Video/@ViewBag.id/@ViewBag.categoryTitle/' + page;
+                }
+            });
+        });
+    </script>
+    </text>
+}

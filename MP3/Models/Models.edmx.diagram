@@ -32,6 +32,7 @@
         <AssociationConnector Association="DatabaseModel.FK_SongPlaylist_InPlaylists" />
         <AssociationConnector Association="DatabaseModel.FK_SongPlaylist_HasSongs" />
         <AssociationConnector Association="DatabaseModel.UserLikePlaylist" />
+        <AssociationConnector Association="DatabaseModel.PlaylistCategory1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
