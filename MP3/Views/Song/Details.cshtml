@@ -60,7 +60,21 @@
                     {
                         <li><a href="/Upload/musics/@Model.VideoFile" title="Nhấn chuột phải chọn Save as ...">Tải về máy</a></li>
                     }
+
+
                     <li><a href="javascript:;">Chia sẻ</a></li>
+                    @if (@ViewBag.CurrentUser == null)
+                    {
+                        <li><a class="like-btn" href="javascript:alert('Vui lòng đăng nhập');">Thích</a></li>
+                    }
+                    else if (@Model.LikedUsers.Where(u => u.UserId == ViewBag.CurrentUser.UserId).Count() > 0)
+                    {
+                        <li><a class="dislike-btn" href="javascript:;">Bỏ thích</a></li>
+                    }
+                    else
+                    {
+                        <li><a class="like-btn" href="javascript:;">Thích</a></li>
+                    }
                 </ul>
             </div>
 
