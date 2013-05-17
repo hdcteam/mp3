@@ -1,0 +1,70 @@
+﻿@model MP3.Models.Songs
+
+<div class="title">Bình luận</div>
+<div class="new-comment clearfix">
+    @if (ViewBag.CurrentUser != null)
+    {
+        using (Html.BeginForm())
+        {
+        <div class="comment-details">
+
+            <div class="avatar">
+                @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", (MP3.Models.UserProfile)ViewBag.CurrentUser, new ViewDataDictionary());}
+            </div>
+            <div class="details">
+                <div class="content">
+                    @Html.TextArea("cmtContent")
+                </div>
+            </div>
+        </div>
+        <div class="submit">
+            <input type="submit" name="submit" value="Đăng bình luận" />
+        </div>
+        }
+    }
+    else
+    {
+        <div class="need-login">Bạn cần @Html.ActionLink("đăng nhập", "Login", "Account") để đăng bình luận!</div>
+    }
+</div>
+
+<script lang="javascript">
+    $(document).ready(function () {
+
+        $(".new-comment form").submit(function () {
+            this.submit.disabled = true;
+            this.submit.value = "Đang tải ...";
+            var form = this;
+            $.ajax(
+                {
+                    url: '@Url.Action("Create", "SongComment")', 
+                    data: {songId: @Model.Id, content: this.cmtContent.value}, 
+                    success: function (data) {
+
+                        if (data.type == "SUCCESS")
+                        {
+                            $(".new-comment").hide();
+                            $(".comment-list").append(data.html);
+                            $(".no-comment").hide();
+                        }
+                        else
+                        {
+                            alert("Lỗi" + data.msg);
+                            form.submit.disabled = false;
+                            form.submit.value = "Đăng bình luận";
+                        }
+                    },
+
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(textStatus + ":" + jqXHR.responseText );
+                        form.submit.disabled = false;
+                        form.submit.value = "Đăng bình luận";
+                    },
+
+                    dataType: "json",
+                    type: "POST"
+                });
+            return false;
+        });
+    });
+</script>

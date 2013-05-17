@@ -93,61 +93,18 @@
             </div>
 
             <div class="comment">
-                <div class="title">Bình luận</div>
-                <div class="new-comment clearfix">
-                    @if (ViewBag.CurrentUser != null)
+                @{Html.RenderPartial("~/Views/Song/_NewComment.cshtml", Model);}
+                <div class="comment-list">
+                    @if (Model.Comments.Count > 0)
                     {
-                        <div class="comment-details">
-                            @using (Html.BeginForm())
-                            {
-                                <div class="avatar">
-                                    @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", (MP3.Models.UserProfile)ViewBag.CurrentUser, new ViewDataDictionary());}
-                                </div>
-                                <div class="details">
-                                    <div class="content">
-                                        @Html.TextArea("cmt-content")
-                                    </div>
-                                </div>
-                            }
-
-                        </div>
-                        <div class="submit">
-                            <input type="submit" value="Đăng bình luận" />
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="need-login">Bạn cần @Html.ActionLink("đăng nhập", "Login", "Account") để đăng bình luận!</div>
+                        foreach (MP3.Models.SongComment songCmt in Model.Comments)
+                        {
+                            Html.RenderPartial("~/Views/Song/_CommentDisplay.cshtml", songCmt);
+                        }
                     }
                 </div>
-                @if (Model.Comments.Count > 0)
-                {
-                    <div class="comment-list">
-                        @foreach (MP3.Models.SongComment songCmt in Model.Comments)
-                        {
-                            <div class="comment-details clearfix">
-                                <div class="avatar">
-                                    @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", songCmt.User);}
-                                </div>
-                                <div class="details">
-                                    <div class="info clearfix">
-                                        <div class="username">
-                                            @Html.ActionLink(songCmt.User.UserName, "Details", "UserProfile", new { id = songCmt.User.UserId }, null)
-                                        </div>
-                                        <div class="time">
-                                            @songCmt.PostTime.ToString()
-                                        </div>
-                                    </div>
 
-                                    <div class="content">
-                                        @songCmt.Content
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                }
-                else
+                @if (Model.Comments.Count == 0)
                 {
                     <div class="no-comment">
                         Chưa có bình luận nào!

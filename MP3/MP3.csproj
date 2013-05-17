@@ -176,6 +176,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SongCommentController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -459,6 +460,13 @@
     <Content Include="Views\Shared\_AvatarDisplay.cshtml" />
     <Content Include="Views\Category\ListVideo.cshtml" />
     <Content Include="Views\Category\ListAlbum.cshtml" />
+    <Content Include="Views\Song\_CommentDisplay.cshtml" />
+    <Content Include="Views\Song\_NewComment.cshtml" />
+    <Content Include="Views\SongComment\Index.cshtml" />
+    <Content Include="Views\SongComment\Details.cshtml" />
+    <Content Include="Views\SongComment\Create.cshtml" />
+    <Content Include="Views\SongComment\Edit.cshtml" />
+    <Content Include="Views\SongComment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
