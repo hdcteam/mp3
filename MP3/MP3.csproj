@@ -248,6 +248,8 @@
     <Content Include="Content\js\jQuery.jPlayer.2.3.0\skin\blue.monday\jplayer.blue.monday.seeking.gif" />
     <Content Include="Content\js\jQuery.jPlayer.2.3.0\skin\blue.monday\jplayer.blue.monday.video.play.png" />
     <Content Include="Content\js\jquery.paginate.js" />
+    <Content Include="Content\js\song-comment.js" />
+    <Content Include="Content\js\song-like.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\stylesheet\nivo-slider-style.css" />
     <Content Include="Content\stylesheet\nivo-slider.css" />
@@ -441,17 +443,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\Details.cshtml" />
-    <Content Include="Views\Category\Create.cshtml" />
-    <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\ListMusic.cshtml" />
-    <Content Include="Views\Song\Index.cshtml" />
     <Content Include="Views\Song\Details.cshtml" />
-    <Content Include="Views\Song\Create.cshtml" />
-    <Content Include="Views\Song\Edit.cshtml" />
-    <Content Include="Views\Song\Delete.cshtml" />
     <Content Include="Views\Shared\_ArtistList.cshtml" />
     <Content Include="Views\Shared\WriterList.cshtml" />
     <Content Include="Views\Shared\_PlaylistList.cshtml" />
@@ -462,11 +455,7 @@
     <Content Include="Views\Category\ListAlbum.cshtml" />
     <Content Include="Views\Song\_CommentDisplay.cshtml" />
     <Content Include="Views\Song\_NewComment.cshtml" />
-    <Content Include="Views\SongComment\Index.cshtml" />
-    <Content Include="Views\SongComment\Details.cshtml" />
     <Content Include="Views\SongComment\Create.cshtml" />
-    <Content Include="Views\SongComment\Edit.cshtml" />
-    <Content Include="Views\SongComment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
