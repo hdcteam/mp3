@@ -29,6 +29,36 @@ namespace MP3.Controllers
             return View(song);
         }
 
+        //
+        // POST: /Song/Like
+
+        [HttpPost]
+        public ActionResult Like(int songId)
+        {
+            object result;
+            if (CurrentUser == null || db.Songs.Find(songId) == null)
+                return HttpNotFound();
+
+            UserProfile user = new UserProfile { UserId = CurrentUser.UserId };
+            db.UserProfile.Attach(user);
+            Songs song = db.Songs.Find(songId);
+
+            if (song.LikedUsers.Where(u => u.UserId == CurrentUser.UserId).Count() == 0)
+            {
+                song.LikedUsers.Add(user);
+            }
+            else
+            {
+                song.LikedUsers.Remove(user);
+            }
+            db.SaveChanges();
+
+            result = new { type = "SUCCESS" };
+            JsonResult json = new JsonResult();
+            json.Data = result;
+            return json;
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

@@ -248,8 +248,6 @@
     <Content Include="Content\js\jQuery.jPlayer.2.3.0\skin\blue.monday\jplayer.blue.monday.seeking.gif" />
     <Content Include="Content\js\jQuery.jPlayer.2.3.0\skin\blue.monday\jplayer.blue.monday.video.play.png" />
     <Content Include="Content\js\jquery.paginate.js" />
-    <Content Include="Content\js\song-comment.js" />
-    <Content Include="Content\js\song-like.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\stylesheet\nivo-slider-style.css" />
     <Content Include="Content\stylesheet\nivo-slider.css" />

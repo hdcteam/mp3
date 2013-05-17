@@ -114,10 +114,67 @@
         </div>
     </div>
 </div>
+
 <script>
-    var _songId = @Model.Id;
+    // Comment
+    $(document).ready(function () {
+
+        $(".new-comment form").submit(function () {
+            this.submit.disabled = true;
+            this.submit.value = "Đang tải ...";
+            var form = this;
+            $.ajax(
+                {
+                    url: '@Url.Action("Create", "SongComment")', 
+                    data: {songId: @Model.Id, content: this.cmtContent.value}, 
+                    success: function (data) {
+
+                        if (data.type == "SUCCESS")
+                        {
+                            $(".new-comment").hide();
+                            $(".comment-list").append(data.html);
+                            $(".no-comment").hide();
+                        }
+                        else
+                        {
+                            alert("Lỗi" + data.msg);
+                            form.submit.disabled = false;
+                            form.submit.value = "Đăng bình luận";
+                        }
+                    },
+
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(textStatus + ":" + jqXHR.responseText );
+                        form.submit.disabled = false;
+                        form.submit.value = "Đăng bình luận";
+                    },
+
+                    dataType: "json",
+                    type: "POST"
+                });
+            return false;
+        });
+    });
+
+    // Like
+    $(document).ready(function () {
+        $(".tools .like-btn").click(function () {
+            if (this.innerText == "Thích")
+                this.innerText = "Bỏ thích";
+            else
+                this.innerText = "Thích";
+
+            $.ajax(
+                {
+                    url: '@Url.Action("Like", "Song")',
+                    data: { songId: @Model.Id },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Đã xảy ra lỗi, vui lòng thử lại sau!\n");
+                    },
+
+                    dataType: "json",
+                    type: "POST"
+                });
+        });
+    });
 </script>
-@if (ViewBag.CurrentUser != null)
-{
-    @Scripts.Render("~/Content/js/song-like.js")
-}
