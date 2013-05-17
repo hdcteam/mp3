@@ -69,7 +69,7 @@
                     }
                     else if (@Model.LikedUsers.Where(u => u.UserId == ViewBag.CurrentUser.UserId).Count() > 0)
                     {
-                        <li><a class="dislike-btn" href="javascript:;">Bỏ thích</a></li>
+                        <li><a class="like-btn" href="javascript:;">Bỏ thích</a></li>
                     }
                     else
                     {
@@ -114,3 +114,7 @@
         </div>
     </div>
 </div>
+@if (ViewBag.CurrentUser != null)
+{
+    @Scripts.Render("~/Content/js/song-like.js")
+}
