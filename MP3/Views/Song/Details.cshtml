@@ -114,6 +114,9 @@
         </div>
     </div>
 </div>
+<script>
+    var _songId = @Model.Id;
+</script>
 @if (ViewBag.CurrentUser != null)
 {
     @Scripts.Render("~/Content/js/song-like.js")

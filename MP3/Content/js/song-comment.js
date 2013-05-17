@@ -7,7 +7,7 @@
         $.ajax(
             {
                 url: '@Url.Action("Create", "SongComment")', 
-                data: {songId: @Model.Id, content: this.cmtContent.value}, 
+                data: {songId: _songId, content: this.cmtContent.value}, 
                 success: function (data) {
 
                     if (data.type == "SUCCESS")
