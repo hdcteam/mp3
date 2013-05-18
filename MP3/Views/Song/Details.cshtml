@@ -46,10 +46,13 @@
                             {
                                 foreach (MP3.Models.Playlists uPlaylist in ViewBag.CurrentUser.Playlists)
                                 {
-                                <li>@Html.ActionLink(uPlaylist.Name, "Add", "Playlist", new { id = Model.Id, pid = uPlaylist.Id }, null)</li>
+                                    if (uPlaylist.SongsInPlaylist.Where(s => s.SongId == Model.Id).Count() == 0)
+                                    {
+                                <li>@Html.ActionLink(uPlaylist.Name, "Add", "Playlist", new { songId = Model.Id, playlistId = uPlaylist.Id }, null)</li>
+                                    }
                                 }
                             }
-                            <li class="new-playlist">@Html.ActionLink("Playlist mới", "Add", "Playlist", new { id = Model.Id }, null)</li>
+                            <li class="new-playlist">@Html.ActionLink("Playlist mới", "Add", "Playlist", new { songId = Model.Id }, null)</li>
                         </ul>
                     </li>
                     @if (@Model.MusicFile != null)

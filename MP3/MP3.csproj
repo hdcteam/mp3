@@ -176,6 +176,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlaylistController.cs" />
     <Compile Include="Controllers\SongCommentController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -453,10 +454,11 @@
     <Content Include="Views\Category\ListAlbum.cshtml" />
     <Content Include="Views\Song\_CommentDisplay.cshtml" />
     <Content Include="Views\Song\_NewComment.cshtml" />
-    <Content Include="Views\SongComment\Create.cshtml" />
+    <Content Include="Views\Playlist\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SongComment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

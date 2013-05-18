@@ -1,0 +1,10 @@
+﻿@model MP3.Models.SongPlaylist
+
+@{
+    ViewBag.Title = "Thêm bài hát vào playlist";
+}
+
+<div class="msgbox success">
+    Bạn đã thêm bài hát @Html.ActionLink(Model.SongInfo.Name, "Details", "Song", new { id=Model.SongId, title=Model.SongInfo.Name.Replace(" ", ",") }, null)
+    vào playlist @Html.ActionLink(Model.Playlist.Name, "Details", "Playlist", new { id=Model.PlaylistId, title=Model.Playlist.Name.Replace(" ", ",") }, null)
+</div>
