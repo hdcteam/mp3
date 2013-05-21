@@ -14,6 +14,18 @@ namespace MP3
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Add song to existing playlist",
+                url: "Playlist/Add/{songId}/{playlistId}",
+                defaults: new { controller = "Playlist", action = "Add" }
+            );
+
+            routes.MapRoute(
+                name: "Add song to new playlist",
+                url: "Playlist/Add/{songId}",
+                defaults: new { controller = "Playlist", action = "Add" }
+            );
+
+            routes.MapRoute(
                 name: "Video",
                 url: "Video/{id}/{title}",
                 defaults: new { controller = "Category", action = "ListVideo", title = UrlParameter.Optional, id = UrlParameter.Optional, page = 1 }

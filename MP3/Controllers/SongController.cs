@@ -14,15 +14,6 @@ namespace MP3.Controllers
         private Entities db = new Entities();
 
         //
-        // GET: /Song/
-
-        public ActionResult Index()
-        {
-            var songs = db.Songs.Include(s => s.Country);
-            return View(songs.ToList());
-        }
-
-        //
         // GET: /Song/Details/5
 
         public ActionResult Details(string title, int id = 0)
@@ -39,87 +30,33 @@ namespace MP3.Controllers
         }
 
         //
-        // GET: /Song/Create
-
-        public ActionResult Create()
-        {
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name");
-            return View();
-        }
-
-        //
-        // POST: /Song/Create
+        // POST: /Song/Like
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Songs song)
+        public ActionResult Like(int songId)
         {
-            if (ModelState.IsValid)
-            {
-                db.Songs.Add(song);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", song.CountryId);
-            return View(song);
-        }
-
-        //
-        // GET: /Song/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            Songs song = db.Songs.Find(id);
-            if (song == null)
-            {
+            object result;
+            if (CurrentUser == null || db.Songs.Find(songId) == null)
                 return HttpNotFound();
-            }
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", song.CountryId);
-            return View(song);
-        }
 
-        //
-        // POST: /Song/Edit/5
+            UserProfile user = new UserProfile { UserId = CurrentUser.UserId };
+            db.UserProfile.Attach(user);
+            Songs song = db.Songs.Find(songId);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Songs songs)
-        {
-            if (ModelState.IsValid)
+            if (song.LikedUsers.Where(u => u.UserId == CurrentUser.UserId).Count() == 0)
             {
-                db.Entry(songs).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                song.LikedUsers.Add(user);
             }
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", songs.CountryId);
-            return View(songs);
-        }
-
-        //
-        // GET: /Song/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            Songs songs = db.Songs.Find(id);
-            if (songs == null)
+            else
             {
-                return HttpNotFound();
+                song.LikedUsers.Remove(user);
             }
-            return View(songs);
-        }
-
-        //
-        // POST: /Song/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Songs songs = db.Songs.Find(id);
-            db.Songs.Remove(songs);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            result = new { type = "SUCCESS" };
+            JsonResult json = new JsonResult();
+            json.Data = result;
+            return json;
         }
 
         protected override void Dispose(bool disposing)

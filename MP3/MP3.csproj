@@ -176,6 +176,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlaylistController.cs" />
+    <Compile Include="Controllers\SongCommentController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -440,17 +442,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\Details.cshtml" />
-    <Content Include="Views\Category\Create.cshtml" />
-    <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\ListMusic.cshtml" />
-    <Content Include="Views\Song\Index.cshtml" />
     <Content Include="Views\Song\Details.cshtml" />
-    <Content Include="Views\Song\Create.cshtml" />
-    <Content Include="Views\Song\Edit.cshtml" />
-    <Content Include="Views\Song\Delete.cshtml" />
     <Content Include="Views\Shared\_ArtistList.cshtml" />
     <Content Include="Views\Shared\WriterList.cshtml" />
     <Content Include="Views\Shared\_PlaylistList.cshtml" />
@@ -459,9 +452,13 @@
     <Content Include="Views\Shared\_AvatarDisplay.cshtml" />
     <Content Include="Views\Category\ListVideo.cshtml" />
     <Content Include="Views\Category\ListAlbum.cshtml" />
+    <Content Include="Views\Song\_CommentDisplay.cshtml" />
+    <Content Include="Views\Song\_NewComment.cshtml" />
+    <Content Include="Views\Playlist\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SongComment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
