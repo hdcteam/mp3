@@ -1,0 +1,21 @@
+﻿@model MP3.Models.SongComment
+
+<div class="comment-details clearfix">
+    <div class="avatar">
+        @{Html.RenderPartial("~/Views/Shared/_AvatarDisplay.cshtml", Model.User);}
+    </div>
+    <div class="details">
+        <div class="info clearfix">
+            <div class="username">
+                @Html.ActionLink(Model.User.UserName, "Details", "UserProfile", new { id = Model.User.UserId }, null)
+            </div>
+            <div class="time">
+                @Model.PostTime.ToString()
+            </div>
+        </div>
+
+        <div class="content">
+            @Model.Content
+        </div>
+    </div>
+</div>
