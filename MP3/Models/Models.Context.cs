@@ -25,7 +25,6 @@ namespace MP3.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Artists> Artists { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Countries> Countries { get; set; }
         public DbSet<PlaylistComment> PlaylistComment { get; set; }
@@ -36,5 +35,6 @@ namespace MP3.Models
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
         public DbSet<Playlists> Playlists { get; set; }
         public DbSet<SongPlaylist> SongPlaylist { get; set; }
+        public DbSet<Artists> Artists { get; set; }
     }
 }

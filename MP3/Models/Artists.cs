@@ -16,9 +16,10 @@ namespace MP3.Models
     {
         public Artists()
         {
+            this.Playlists = new HashSet<Playlists>();
             this.SangSongs = new HashSet<Songs>();
             this.WroteSongs = new HashSet<Songs>();
-            this.UserProfile = new HashSet<UserProfile>();
+            this.LikedUsers = new HashSet<UserProfile>();
         }
     
         public int Id { get; set; }
@@ -33,8 +34,9 @@ namespace MP3.Models
         public int View { get; set; }
     
         public virtual Countries Country { get; set; }
+        public virtual ICollection<Playlists> Playlists { get; set; }
         public virtual ICollection<Songs> SangSongs { get; set; }
         public virtual ICollection<Songs> WroteSongs { get; set; }
-        public virtual ICollection<UserProfile> UserProfile { get; set; }
+        public virtual ICollection<UserProfile> LikedUsers { get; set; }
     }
 }
