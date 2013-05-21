@@ -18,11 +18,11 @@ namespace MP3.Models
         {
             this.CommentedPlaylists = new HashSet<PlaylistComment>();
             this.CommentedSongs = new HashSet<SongComment>();
-            this.LikedArtists = new HashSet<Artists>();
             this.LikedSongs = new HashSet<Songs>();
             this.Roles = new HashSet<webpages_Roles>();
             this.Playlists = new HashSet<Playlists>();
             this.LikedPlaylists = new HashSet<Playlists>();
+            this.LikedArtists = new HashSet<Artists>();
         }
     
         public int UserId { get; set; }
@@ -32,10 +32,10 @@ namespace MP3.Models
     
         public virtual ICollection<PlaylistComment> CommentedPlaylists { get; set; }
         public virtual ICollection<SongComment> CommentedSongs { get; set; }
-        public virtual ICollection<Artists> LikedArtists { get; set; }
         public virtual ICollection<Songs> LikedSongs { get; set; }
         public virtual ICollection<webpages_Roles> Roles { get; set; }
         public virtual ICollection<Playlists> Playlists { get; set; }
         public virtual ICollection<Playlists> LikedPlaylists { get; set; }
+        public virtual ICollection<Artists> LikedArtists { get; set; }
     }
 }

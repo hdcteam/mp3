@@ -9,6 +9,7 @@
           <EntitySet Name="Artists" EntityType="DatabaseModel.Store.Artists" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Categories" EntityType="DatabaseModel.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Countries" EntityType="DatabaseModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlaylistArtist" EntityType="DatabaseModel.Store.PlaylistArtist" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PlaylistCategory" EntityType="DatabaseModel.Store.PlaylistCategory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PlaylistComment" EntityType="DatabaseModel.Store.PlaylistComment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Playlists" EntityType="DatabaseModel.Store.Playlists" store:Type="Tables" Schema="dbo" />
@@ -28,6 +29,14 @@
           <AssociationSet Name="FK_Artists_Countries" Association="DatabaseModel.Store.FK_Artists_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Artists" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistArtist_Artists" Association="DatabaseModel.Store.FK_PlaylistArtist_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="PlaylistArtist" EntitySet="PlaylistArtist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistArtist_Playlists" Association="DatabaseModel.Store.FK_PlaylistArtist_Playlists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="PlaylistArtist" EntitySet="PlaylistArtist" />
           </AssociationSet>
           <AssociationSet Name="FK_PlaylistCategory_Categories" Association="DatabaseModel.Store.FK_PlaylistCategory_Categories">
             <End Role="Categories" EntitySet="Categories" />
@@ -155,6 +164,14 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PlaylistArtist">
+          <Key>
+            <PropertyRef Name="PlaylistId" />
+            <PropertyRef Name="ArtistId" />
+          </Key>
+          <Property Name="PlaylistId" Type="int" Nullable="false" />
+          <Property Name="ArtistId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PlaylistCategory">
           <Key>
@@ -323,6 +340,30 @@
             </Principal>
             <Dependent Role="Artists">
               <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistArtist_Artists">
+          <End Role="Artists" Type="DatabaseModel.Store.Artists" Multiplicity="1" />
+          <End Role="PlaylistArtist" Type="DatabaseModel.Store.PlaylistArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlaylistArtist">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistArtist_Playlists">
+          <End Role="Playlists" Type="DatabaseModel.Store.Playlists" Multiplicity="1" />
+          <End Role="PlaylistArtist" Type="DatabaseModel.Store.PlaylistArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlaylistArtist">
+              <PropertyRef Name="PlaylistId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -649,7 +690,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Artists" EntityType="DatabaseModel.Artists" />
           <EntitySet Name="Categories" EntityType="DatabaseModel.Categories" />
           <EntitySet Name="Countries" EntityType="DatabaseModel.Countries" />
           <EntitySet Name="PlaylistComment" EntityType="DatabaseModel.PlaylistComment" />
@@ -658,10 +698,6 @@
           <EntitySet Name="UserProfile" EntityType="DatabaseModel.UserProfile" />
           <EntitySet Name="webpages_Membership" EntityType="DatabaseModel.webpages_Membership" />
           <EntitySet Name="webpages_Roles" EntityType="DatabaseModel.webpages_Roles" />
-          <AssociationSet Name="FK_Artists_Countries" Association="DatabaseModel.FK_Artists_Countries">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="Artists" EntitySet="Artists" />
-          </AssociationSet>
           <AssociationSet Name="FK_Songs_Countries" Association="DatabaseModel.FK_Songs_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Songs" EntitySet="Songs" />
@@ -682,6 +718,49 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Songs" EntitySet="Songs" />
           </AssociationSet>
+          <AssociationSet Name="UserLikeSong" Association="DatabaseModel.UserLikeSong">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="DatabaseModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <EntitySet Name="Playlists" EntityType="DatabaseModel.Playlists" />
+          <EntitySet Name="SongPlaylist" EntityType="DatabaseModel.SongPlaylist" />
+          <AssociationSet Name="FK_PlaylistComment_Playlists" Association="DatabaseModel.FK_PlaylistComment_Playlists">
+            <End EntitySet="Playlists" Role="Playlists" />
+            <End EntitySet="PlaylistComment" Role="PlaylistComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlists_UserProfile" Association="DatabaseModel.FK_Playlists_UserProfile">
+            <End EntitySet="UserProfile" Role="UserProfile" />
+            <End EntitySet="Playlists" Role="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongPlaylist_InPlaylists" Association="DatabaseModel.FK_SongPlaylist_InPlaylists">
+            <End EntitySet="Playlists" Role="Playlists" />
+            <End EntitySet="SongPlaylist" Role="SongPlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SongPlaylist_HasSongs" Association="DatabaseModel.FK_SongPlaylist_HasSongs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="SongPlaylist" EntitySet="SongPlaylist" />
+          </AssociationSet>
+          <AssociationSet Name="UserLikePlaylist" Association="DatabaseModel.UserLikePlaylist">
+            <End EntitySet="Playlists" Role="Playlists" />
+            <End EntitySet="UserProfile" Role="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="PlaylistCategory1" Association="DatabaseModel.PlaylistCategory1">
+            <End EntitySet="Categories" Role="Categories" />
+            <End EntitySet="Playlists" Role="Playlists" />
+          </AssociationSet>
+          <EntitySet Name="Artists" EntityType="DatabaseModel.Artists" />
+          <AssociationSet Name="FK_Artists_Countries" Association="DatabaseModel.FK_Artists_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Artists" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="PlaylistArtist" Association="DatabaseModel.PlaylistArtist">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
           <AssociationSet Name="SongSinger" Association="DatabaseModel.SongSinger">
             <End Role="Artists" EntitySet="Artists" />
             <End Role="Songs" EntitySet="Songs" />
@@ -694,60 +773,7 @@
             <End Role="Artists" EntitySet="Artists" />
             <End Role="UserProfile" EntitySet="UserProfile" />
           </AssociationSet>
-          <AssociationSet Name="UserLikeSong" Association="DatabaseModel.UserLikeSong">
-            <End Role="Songs" EntitySet="Songs" />
-            <End Role="UserProfile" EntitySet="UserProfile" />
-          </AssociationSet>
-          <AssociationSet Name="webpages_UsersInRoles" Association="DatabaseModel.webpages_UsersInRoles">
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
-            <End Role="UserProfile" EntitySet="UserProfile" />
-          </AssociationSet>
-          <EntitySet Name="Playlists" EntityType="DatabaseModel.Playlists" />
-          <EntitySet Name="SongPlaylist" EntityType="DatabaseModel.SongPlaylist" />
-          <AssociationSet Name="FK_PlaylistComment_Playlists" Association="DatabaseModel.FK_PlaylistComment_Playlists">
-            <End Role="Playlists" EntitySet="Playlists" />
-            <End Role="PlaylistComment" EntitySet="PlaylistComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Playlists_UserProfile" Association="DatabaseModel.FK_Playlists_UserProfile">
-            <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="Playlists" EntitySet="Playlists" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SongPlaylist_InPlaylists" Association="DatabaseModel.FK_SongPlaylist_InPlaylists">
-            <End Role="Playlists" EntitySet="Playlists" />
-            <End Role="SongPlaylist" EntitySet="SongPlaylist" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SongPlaylist_HasSongs" Association="DatabaseModel.FK_SongPlaylist_HasSongs">
-            <End Role="Songs" EntitySet="Songs" />
-            <End Role="SongPlaylist" EntitySet="SongPlaylist" />
-          </AssociationSet>
-          <AssociationSet Name="UserLikePlaylist" Association="DatabaseModel.UserLikePlaylist">
-            <End Role="Playlists" EntitySet="Playlists" />
-            <End Role="UserProfile" EntitySet="UserProfile" />
-          </AssociationSet>
-          <AssociationSet Name="PlaylistCategory1" Association="DatabaseModel.PlaylistCategory1">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Playlists" EntitySet="Playlists" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Artists">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="RealName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Image" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Info" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="Dob" Type="DateTime" Precision="0" />
-          <Property Name="Website" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
-          <Property Name="View" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Country" Relationship="DatabaseModel.FK_Artists_Countries" FromRole="Artists" ToRole="Countries" />
-          <NavigationProperty Name="SangSongs" Relationship="DatabaseModel.SongSinger" FromRole="Artists" ToRole="Songs" />
-          <NavigationProperty Name="WroteSongs" Relationship="DatabaseModel.SongWriter" FromRole="Artists" ToRole="Songs" />
-          <NavigationProperty Name="UserProfile" Relationship="DatabaseModel.UserLikeArtist" FromRole="Artists" ToRole="UserProfile" />
-        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -764,8 +790,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Artists" Relationship="DatabaseModel.FK_Artists_Countries" FromRole="Countries" ToRole="Artists" />
           <NavigationProperty Name="Songs" Relationship="DatabaseModel.FK_Songs_Countries" FromRole="Countries" ToRole="Songs" />
+          <NavigationProperty Name="Artists" Relationship="DatabaseModel.FK_Artists_Countries" FromRole="Countries" ToRole="Artists" />
         </EntityType>
         <EntityType Name="PlaylistComment">
           <Key>
@@ -811,11 +837,11 @@
           <NavigationProperty Name="Country" Relationship="DatabaseModel.FK_Songs_Countries" FromRole="Songs" ToRole="Countries" />
           <NavigationProperty Name="Comments" Relationship="DatabaseModel.FK_SongComment_Songs" FromRole="Songs" ToRole="SongComment" />
           <NavigationProperty Name="Categories" Relationship="DatabaseModel.SongCategory" FromRole="Songs" ToRole="Categories" />
-          <NavigationProperty Name="Singers" Relationship="DatabaseModel.SongSinger" FromRole="Songs" ToRole="Artists" />
-          <NavigationProperty Name="Writers" Relationship="DatabaseModel.SongWriter" FromRole="Songs" ToRole="Artists" />
           <NavigationProperty Name="LikedUsers" Relationship="DatabaseModel.UserLikeSong" FromRole="Songs" ToRole="UserProfile" />
           <NavigationProperty Name="SongPlaylist" Relationship="DatabaseModel.FK_SongPlaylist_HasSongs" FromRole="Songs" ToRole="SongPlaylist" />
           <Property Type="String" Name="Lyrics" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Singers" Relationship="DatabaseModel.SongSinger" FromRole="Songs" ToRole="Artists" />
+          <NavigationProperty Name="Writers" Relationship="DatabaseModel.SongWriter" FromRole="Songs" ToRole="Artists" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -827,11 +853,11 @@
           <Property Name="Image" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="CommentedPlaylists" Relationship="DatabaseModel.FK_PlaylistComment_UserProfile" FromRole="UserProfile" ToRole="PlaylistComment" />
           <NavigationProperty Name="CommentedSongs" Relationship="DatabaseModel.FK_SongComment_UserProfile" FromRole="UserProfile" ToRole="SongComment" />
-          <NavigationProperty Name="LikedArtists" Relationship="DatabaseModel.UserLikeArtist" FromRole="UserProfile" ToRole="Artists" />
           <NavigationProperty Name="LikedSongs" Relationship="DatabaseModel.UserLikeSong" FromRole="UserProfile" ToRole="Songs" />
           <NavigationProperty Name="Roles" Relationship="DatabaseModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
           <NavigationProperty Name="Playlists" Relationship="DatabaseModel.FK_Playlists_UserProfile" FromRole="UserProfile" ToRole="Playlists" />
           <NavigationProperty Name="LikedPlaylists" Relationship="DatabaseModel.UserLikePlaylist" FromRole="UserProfile" ToRole="Playlists" />
+          <NavigationProperty Name="LikedArtists" Relationship="DatabaseModel.UserLikeArtist" FromRole="UserProfile" ToRole="Artists" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -857,18 +883,6 @@
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Users" Relationship="DatabaseModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
         </EntityType>
-        <Association Name="FK_Artists_Countries">
-          <End Role="Countries" Type="DatabaseModel.Countries" Multiplicity="0..1" />
-          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Countries">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Artists">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Songs_Countries">
           <End Role="Countries" Type="DatabaseModel.Countries" Multiplicity="0..1" />
           <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
@@ -927,18 +941,6 @@
           <End Role="Categories" Type="DatabaseModel.Categories" Multiplicity="*" />
           <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
         </Association>
-        <Association Name="SongSinger">
-          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
-          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
-        </Association>
-        <Association Name="SongWriter">
-          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
-          <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
-        </Association>
-        <Association Name="UserLikeArtist">
-          <End Role="Artists" Type="DatabaseModel.Artists" Multiplicity="*" />
-          <End Role="UserProfile" Type="DatabaseModel.UserProfile" Multiplicity="*" />
-        </Association>
         <Association Name="UserLikeSong">
           <End Role="Songs" Type="DatabaseModel.Songs" Multiplicity="*" />
           <End Role="UserProfile" Type="DatabaseModel.UserProfile" Multiplicity="*" />
@@ -951,20 +953,21 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="UserId" />
-          <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="View" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedTime" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="LastUpdate" Precision="3" />
-          <Property Type="DateTime" Name="StaffPickedTime" Precision="3" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="View" Nullable="false" Type="Int32" />
+          <Property Name="CreatedTime" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="LastUpdate" Precision="3" Type="DateTime" />
+          <Property Name="StaffPickedTime" Precision="3" Type="DateTime" />
           <NavigationProperty Name="Comments" Relationship="DatabaseModel.FK_PlaylistComment_Playlists" FromRole="Playlists" ToRole="PlaylistComment" />
           <NavigationProperty Name="User" Relationship="DatabaseModel.FK_Playlists_UserProfile" FromRole="Playlists" ToRole="UserProfile" />
           <NavigationProperty Name="SongsInPlaylist" Relationship="DatabaseModel.FK_SongPlaylist_InPlaylists" FromRole="Playlists" ToRole="SongPlaylist" />
           <NavigationProperty Name="LikedUsers" Relationship="DatabaseModel.UserLikePlaylist" FromRole="Playlists" ToRole="UserProfile" />
           <NavigationProperty Name="Categories" Relationship="DatabaseModel.PlaylistCategory1" FromRole="Playlists" ToRole="Categories" />
+          <NavigationProperty Name="Artists" Relationship="DatabaseModel.PlaylistArtist" FromRole="Playlists" ToRole="Artists" />
         </EntityType>
         <EntityType Name="SongPlaylist">
           <Key>
@@ -978,10 +981,10 @@
           <NavigationProperty Name="SongInfo" Relationship="DatabaseModel.FK_SongPlaylist_HasSongs" FromRole="SongPlaylist" ToRole="Songs" />
         </EntityType>
         <Association Name="FK_PlaylistComment_Playlists">
-          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="1">
+          <End Type="DatabaseModel.Playlists" Multiplicity="1" Role="Playlists">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="DatabaseModel.PlaylistComment" Role="PlaylistComment" Multiplicity="*" />
+          <End Type="DatabaseModel.PlaylistComment" Multiplicity="*" Role="PlaylistComment" />
           <ReferentialConstraint>
             <Principal Role="Playlists">
               <PropertyRef Name="Id" />
@@ -992,8 +995,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Playlists_UserProfile">
-          <End Type="DatabaseModel.UserProfile" Role="UserProfile" Multiplicity="0..1" />
-          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="*" />
+          <End Type="DatabaseModel.UserProfile" Multiplicity="0..1" Role="UserProfile" />
+          <End Type="DatabaseModel.Playlists" Multiplicity="*" Role="Playlists" />
           <ReferentialConstraint>
             <Principal Role="UserProfile">
               <PropertyRef Name="UserId" />
@@ -1004,10 +1007,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SongPlaylist_InPlaylists">
-          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="1">
+          <End Type="DatabaseModel.Playlists" Multiplicity="1" Role="Playlists">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="DatabaseModel.SongPlaylist" Role="SongPlaylist" Multiplicity="*" />
+          <End Type="DatabaseModel.SongPlaylist" Multiplicity="*" Role="SongPlaylist" />
           <ReferentialConstraint>
             <Principal Role="Playlists">
               <PropertyRef Name="Id" />
@@ -1032,12 +1035,60 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserLikePlaylist">
-          <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="*" />
-          <End Type="DatabaseModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <End Type="DatabaseModel.Playlists" Multiplicity="*" Role="Playlists" />
+          <End Type="DatabaseModel.UserProfile" Multiplicity="*" Role="UserProfile" />
         </Association>
         <Association Name="PlaylistCategory1">
-          <End Type="DatabaseModel.Categories" Role="Categories" Multiplicity="*" />
+          <End Type="DatabaseModel.Categories" Multiplicity="*" Role="Categories" />
+          <End Type="DatabaseModel.Playlists" Multiplicity="*" Role="Playlists" />
+        </Association>
+        <EntityType Name="Artists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RealName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompanyName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Info" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CountryId" />
+          <Property Type="DateTime" Name="Dob" Precision="0" />
+          <Property Type="String" Name="Website" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="View" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="DatabaseModel.FK_Artists_Countries" FromRole="Artists" ToRole="Countries" />
+          <NavigationProperty Name="Playlists" Relationship="DatabaseModel.PlaylistArtist" FromRole="Artists" ToRole="Playlists" />
+          <NavigationProperty Name="SangSongs" Relationship="DatabaseModel.SongSinger" FromRole="Artists" ToRole="Songs" />
+          <NavigationProperty Name="WroteSongs" Relationship="DatabaseModel.SongWriter" FromRole="Artists" ToRole="Songs" />
+          <NavigationProperty Name="LikedUsers" Relationship="DatabaseModel.UserLikeArtist" FromRole="Artists" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_Artists_Countries">
+          <End Type="DatabaseModel.Countries" Role="Countries" Multiplicity="0..1" />
+          <End Type="DatabaseModel.Artists" Role="Artists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Artists">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PlaylistArtist">
+          <End Type="DatabaseModel.Artists" Role="Artists" Multiplicity="*" />
           <End Type="DatabaseModel.Playlists" Role="Playlists" Multiplicity="*" />
+        </Association>
+        <Association Name="SongSinger">
+          <End Type="DatabaseModel.Artists" Role="Artists" Multiplicity="*" />
+          <End Type="DatabaseModel.Songs" Role="Songs" Multiplicity="*" />
+        </Association>
+        <Association Name="SongWriter">
+          <End Type="DatabaseModel.Artists" Role="Artists" Multiplicity="*" />
+          <End Type="DatabaseModel.Songs" Role="Songs" Multiplicity="*" />
+        </Association>
+        <Association Name="UserLikeArtist">
+          <End Type="DatabaseModel.Artists" Role="Artists" Multiplicity="*" />
+          <End Type="DatabaseModel.UserProfile" Role="UserProfile" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1045,22 +1096,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Artists">
-            <EntityTypeMapping TypeName="DatabaseModel.Artists">
-              <MappingFragment StoreEntitySet="Artists">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RealName" ColumnName="RealName" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Info" ColumnName="Info" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="Dob" ColumnName="Dob" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="View" ColumnName="View" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="DatabaseModel.Categories">
               <MappingFragment StoreEntitySet="Categories">
@@ -1163,30 +1198,6 @@
               <ScalarProperty Name="Id" ColumnName="SongId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="SongSinger" TypeName="DatabaseModel.SongSinger" StoreEntitySet="SongSinger">
-            <EndProperty Name="Artists">
-              <ScalarProperty Name="Id" ColumnName="SingerId" />
-            </EndProperty>
-            <EndProperty Name="Songs">
-              <ScalarProperty Name="Id" ColumnName="SongId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="SongWriter" TypeName="DatabaseModel.SongWriter" StoreEntitySet="SongWriter">
-            <EndProperty Name="Artists">
-              <ScalarProperty Name="Id" ColumnName="WriterId" />
-            </EndProperty>
-            <EndProperty Name="Songs">
-              <ScalarProperty Name="Id" ColumnName="SongId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UserLikeArtist" TypeName="DatabaseModel.UserLikeArtist" StoreEntitySet="UserLikeArtist">
-            <EndProperty Name="Artists">
-              <ScalarProperty Name="Id" ColumnName="ArtistId" />
-            </EndProperty>
-            <EndProperty Name="UserProfile">
-              <ScalarProperty Name="UserId" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="UserLikeSong" TypeName="DatabaseModel.UserLikeSong" StoreEntitySet="UserLikeSong">
             <EndProperty Name="Songs">
               <ScalarProperty Name="Id" ColumnName="SongId" />
@@ -1241,6 +1252,54 @@
             </EndProperty>
             <EndProperty Name="Categories">
               <ScalarProperty Name="Id" ColumnName="CategoryId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="DatabaseModel.Artists">
+              <MappingFragment StoreEntitySet="Artists">
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PlaylistArtist" TypeName="DatabaseModel.PlaylistArtist" StoreEntitySet="PlaylistArtist">
+            <EndProperty Name="Playlists">
+              <ScalarProperty Name="Id" ColumnName="PlaylistId" />
+            </EndProperty>
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="Id" ColumnName="ArtistId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SongSinger" TypeName="DatabaseModel.SongSinger" StoreEntitySet="SongSinger">
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="Id" ColumnName="SongId" />
+            </EndProperty>
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="Id" ColumnName="SingerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SongWriter" TypeName="DatabaseModel.SongWriter" StoreEntitySet="SongWriter">
+            <EndProperty Name="Songs">
+              <ScalarProperty Name="Id" ColumnName="SongId" />
+            </EndProperty>
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="Id" ColumnName="WriterId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserLikeArtist" TypeName="DatabaseModel.UserLikeArtist" StoreEntitySet="UserLikeArtist">
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="Id" ColumnName="ArtistId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

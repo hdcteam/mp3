@@ -16,14 +16,14 @@ namespace MP3.Models
     {
         public Countries()
         {
-            this.Artists = new HashSet<Artists>();
             this.Songs = new HashSet<Songs>();
+            this.Artists = new HashSet<Artists>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Artists> Artists { get; set; }
         public virtual ICollection<Songs> Songs { get; set; }
+        public virtual ICollection<Artists> Artists { get; set; }
     }
 }
